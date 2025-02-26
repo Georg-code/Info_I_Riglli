@@ -1,0 +1,935 @@
+\definecolor{myubblelue}{HTML}{003333}
+\definecolor{mysubBlue}{HTML}{004444}
+\definecolor{mysubsubBlue}{HTML}{006666}
+
+
+%% General TODO:
+% Switch Case
+% Floating point how to calculate a number
+% Convert base
+% Bitstrings to lengh n
+% Unsorted set
+% Struct constructor
+% Add structors
+% Werkstatt übung
+% Linked list constructo?
+
+
+
+
+
+\section{Operators}
+\subsection{L-Values and R-Values}
+
+An L-value can be used in place of an R-value (and retains its properties), but the reverse is not true.
+
+\begin{itemize}
+    \item \textbf{L-values}
+    \begin{itemize}
+        \item Appear on the left side of the assignment operator.
+        \item Can have their value modified (if not declared \texttt{const}).
+        \item Represent a storage location with an associated memory address.
+    \end{itemize}
+    \item \textbf{R-values}
+    \begin{itemize}
+        \item Appear on the right side of the assignment operator.
+        \item Cannot have their value modified.
+        \item Typically represent temporary objects or values without a persistent memory address.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Increment/Decrement}
+
+    \textbf{Pre-Increment/Decrement (preferred) (L-wert):}\\
+        \lstinline[style=CodeExpert]{++expr // Increases by one, then returns the value} \\
+       \lstinline[style=CodeExpert]{--expr // Decreases by one, then returns the value} 
+    
+
+    \textbf{Post-Increment/Decrement (R-wert):} 
+
+       \lstinline[style=CodeExpert]{expr++ // Returns the value, then increases by one} \\
+        \lstinline[style=CodeExpert]{expr-- // Returns the value, then decreases by one}  \\
+  
+
+
+\subsection{Logical Operators}
+Logical ators always return boolean values.
+
+\begin{itemize}
+    \item \textbf{NOT: (\cepink{!})}
+    negates the logical expression
+    \item \textbf{AND: (\cepink{\&\&})}
+    returns true if both are true 
+    \item \textbf{OR: (\cepink{||})}
+    returns true if at least one is true 
+    \item \textbf{XOR:} (exclusive or): 
+    \lstinline[style=CodeExpert]{(x || y) && !(x && y)}
+    \item \textbf{NOR:} (neither or both): 
+    \lstinline[style=CodeExpert]{!(x && y || !x && !y)}
+    \item \textbf{De Morgan's Laws:} \\
+     \lstinline[style=CodeExpert]{!(a && b) == (!a || !b)}\\
+    \lstinline[style=CodeExpert]{!(a || b) == (!a && !b)}
+\end{itemize}
+
+
+\begin{lstlisting}[style = codeexpert]
+    if (false && true) { std::cout << "Won't execute\n"; }
+    if (true || false) { std::cout << "Short-circuit OR\n"; }
+    if (false || true && false) { std::cout << "AND before OR\n"; }
+\end{lstlisting}
+
+
+
+\definecolor{myBlue}{HTML}{d88403}
+\definecolor{mysubBlue}{HTML}{fd9e0b}
+\definecolor{mysubsubBlue}{HTML}{fdac0b}
+
+\section{Primitive Datatypes}
+
+
+
+\subsection{Bool}
+\textbf{Bits:} 1 \\
+\textbf{Range:} \lstinline[style=CodeExpert]{true (1)}, \lstinline[style=CodeExpert]{false (0)} \\
+\textbf{Example:} \lstinline[style=CodeExpert]{bool flag = true;}
+
+\subsection{Char}
+\textbf{Bits:} 8 \\
+\textbf{Range:} 
+\begin{itemize}
+    \item Signed: \( -2^7 = -128 \) to \( 2^7 - 1 = 127 \)
+    \item Unsigned: \( 0 \) to \( 2^8 - 1 = 255 \)
+\end{itemize}
+\textbf{Example:} \lstinline[style=CodeExpert]{char c = 'A';}
+
+\subsection{Integer}
+\textbf{Bits:} 32 \\
+\textbf{Range:} 
+\begin{itemize}
+    \item Min: \( -2^{31} = -2,147,483,648 \)
+    \item Max: \( 2^{31} - 1 = 2,147,483,647 \)
+\end{itemize}
+\textbf{Example:} \lstinline[style=CodeExpert]{int num = 42;}
+
+\subsection{Unsigned Integer}
+\textbf{Bits:} 32 \\
+\textbf{Range:} 
+\begin{itemize}
+    \item Min: \( 0 \)
+    \item Max: \( 2^{32} - 1 = 4'294'967'295 = -1u\)
+\end{itemize}
+\textbf{Example:} \lstinline[style=CodeExpert]{unsigned int num = 42;}
+
+\subsection{Float}
+\textbf{Bits:} 32 \\
+\textbf{Range:} 
+\begin{itemize}
+    \item Min: \( \pm 1.17549 \times 10^{-38} \)
+    \item Max: \( \pm 3.40282 \times 10^{38} \)
+\end{itemize}
+\textbf{Example:} \lstinline[style=CodeExpert]{float num = 3.14f;}
+\subsection{Double}
+\textbf{Bits:} 64 \\
+\textbf{Range:} 
+\begin{itemize}
+    \item Min: \( \pm 2.22507 \times 10^{-308} \)
+    \item Max: \( \pm 1.79769 \times 10^{308} \)
+\end{itemize}
+\textbf{Example:} \lstinline[style=CodeExpert]{double num = 3.14;}
+
+
+
+\subsection{Conversion}
+\textbf{\textcolor{teal}{Implicit:}} Automatic conversion occurs in the following order: \\
+\textbf{\textit{\textcolor{purple}{bool}}} $\rightarrow$ 
+\textbf{\textit{\textcolor{purple}{char}}} $\rightarrow$ 
+\textbf{\textit{\textcolor{purple}{int}}} $\rightarrow$ 
+\textbf{\textit{\textcolor{purple}{unsigned int}}} $\rightarrow$ 
+\textbf{\textit{\textcolor{purple}{long}}} $\rightarrow$ 
+\textbf{\textit{\textcolor{purple}{unsigned long}}} $\rightarrow$ 
+\textbf{\textit{\textcolor{purple}{float}}} $\rightarrow$ 
+\textbf{\textit{\textcolor{purple}{double}}} $\rightarrow$ 
+\textbf{\textit{\textcolor{purple}{long double}}}
+
+When converting:
+\begin{itemize}
+    \item \textit{bool} to \textit{char}: \lstinline[style=CodeExpert]{true} becomes 1, \lstinline[style=CodeExpert]{false} becomes 0.
+    \item \textit{char} to \textit{int}: ASCII value of the character is used.
+    \item \textit{int} to \textit{unsigned int}: Negative values wrap around using modulo \( 2^{32} \).
+    \item \textit{unsigned int} to \textit{int}: If the value exceeds the max range of \textit{int}, the behavior is undefined.
+    \item \textit{long} to \textit{unsigned long}: Similar to \textit{int} to \textit{unsigned int}, wraps around.
+    \item \textit{unsigned long} to \textit{float}/\textit{double}: May lose precision for large values, as floating-point types have limited precision.
+    \item \textit{float} to \textit{double}: No loss of information, as \textit{double} has greater precision.
+    \item \textit{double} to \textit{long double}: No loss of information, as \textit{long double} has the highest precision.
+\end{itemize}
+Example: \lstinline[style=CodeExpert]{double y = x;}
+
+\textbf{\textcolor{teal}{Explicit:}} Manual conversion (\textcolor{brown}{type casting}) allows converting any type into another. Common cases include:
+\begin{itemize}
+    \item \lstinline[style=CodeExpert]{int y = (int)x;} // Converts \textit{double} to \textit{int}, truncates fractional part.
+    \item \lstinline[style=CodeExpert]{unsigned int y = (unsigned int)x;} // Converts \textit{int} to \textit{unsigned int}, wraps negative values.
+\end{itemize}
+
+\definecolor{myBlue}{HTML}{7a0000}
+
+
+\definecolor{myBlue}{HTML}{00155d}
+\definecolor{mysubBlue}{HTML}{1f41b5}
+\definecolor{mysubsubBlue}{HTML}{2d5cff}
+
+\section{Floating Point Calculations}
+
+\subsection{Basics}
+
+Floating-point numbers represent real numbers:
+\begin{itemize}
+    \item \textbf{Sign bit (1 bit)}: Determines the sign (0 = positive, 1 = negative).
+    \item \textbf{Exponent (8/11 bits)}: Encodes the magnitude of the number (biased representation).
+    \item \textbf{Mantissa (23/52 bits)}: Encodes the significant digits in normalized form.
+\end{itemize}
+
+Common types:
+\begin{itemize}
+    \item \texttt{float}: 32-bit, ~7 decimal digits precision.
+    \item \texttt{double}: 64-bit, ~15 decimal digits precision.
+\end{itemize}
+
+\textbf{IEE Standard 754}\\
+format: Exp[bits]Mantisse[bits]
+\begin{itemize}
+    \item Float
+    \subitem F*(2,24,-126,127) (32bits)
+    \subitem $\pm$[1bit] Exp[8bits] Mantisse[23bits]
+    \item Double 
+    \subitem F*(2,53,-1022,1023) (64bits)
+\end{itemize}
+
+\subsection{Arithmetic and Precision}
+\begin{itemize}
+    \item Floating-point operations (\lstinline[style=CodeExpert]{+}, \lstinline[style=CodeExpert]{-}, \lstinline[style=CodeExpert]{*}, \lstinline[style=CodeExpert]{/}) are subject to rounding errors due to finite precision.
+    \item Avoid direct comparison of floating-point numbers. Use a tolerance, e.g.,
+    \begin{lstlisting}[style=codeexpert]
+    if (fabs(a-b)< tolerance) { ... }
+    \end{lstlisting}
+\end{itemize}
+
+\subsection{Range Calculation}
+A \textbf{floating-point number system} is defined by four natural numbers:
+
+\[
+F(\beta, \rho, e_{\text{min}}, e_{\text{max}})
+\]
+
+
+%% TODO ADD EXMPLE
+\(\beta\) is the \textbf{base}, \(\rho\) is the \textbf{precision/number of digits}, \(e_{\text{min}}\) is the \textbf{smallest exponent}, and \(e_{\text{max}}\) is the \textbf{largest exponent}.
+
+The \textbf{normalized representation} \(F^*\) does not allow a leading zero before the decimal point.
+
+Formulas for the normalized representation:
+
+\begin{itemize}
+    \item \textbf{Largest and most negative number:} 
+    \[
+    \pm \beta^{e_{\text{max}} + 1} \cdot (1 - \beta^{-\rho})
+    \]
+    \item \textbf{Smallest positive number:} 
+    \[
+    \beta^{e_{\text{min}}}
+    \]
+    \item \textbf{Total number of values:} 
+    \[
+    2 \cdot (\beta - 1) \cdot \beta^{\rho - 1} \cdot (e_{\text{max}} - e_{\text{min}} + 1)
+    \]
+    \item \textbf{Number of positive values:} 
+    \[
+    (\beta - 1) \cdot \beta^{\rho - 1} \cdot (e_{\text{max}} - e_{\text{min}} + 1)
+    \]
+\end{itemize}
+Note: The floating-point representation system works the same way for positive and negative numbers. The sign bit is stored separately and does not affect the rules for normalization, precision, or exponent range.
+
+
+\[
+\begin{array}{c|ccccccc}
+d_{1}d^{r}d_{\delta} & e = -3 & e = -2 & e = -1 & e = 0 & e = 1 & e = 2 & e = 3 \\
+\midrule
+1.00, & 0.125 & 0.25 & 0.5 & 1 & 2 & 4 & 8 \\
+1.01, & 0.15625 & 0.3125 & 0.625 & 1.25 & 2.5 & 5 & 10 \\
+1.10, & 0.1875 & 0.375 & 0.75 & 1.5 & 3 & 6 & 12 \\
+1.11, & 0.21875 & 0.4375 & 0.875 & 1.75 & 3.5 & 7 & 14 \\
+\end{array}
+\]
+
+
+\subsection{Const}
+\begin{lstlisting}[style=codeexpert]
+const int p0;
+// p0 is a constant integer (same as int const p1).
+
+int const p1;
+// p1 is a constant integer.
+
+int const* p2;
+// p2 is a pointer to a constant integer (read-only pointer to integer).
+
+int* const p3;
+// p3 is a constant pointer to an integer (non-changeable pointer to integer).
+
+int const* const p4;
+// p4 is a constant pointer to a constant integer (non-changeable read-only pointer).
+\end{lstlisting}
+
+
+
+\section{Precedences}
+
+
+\begin{tabular}{|c|p{5cm}|c|}
+\hline
+\textbf{Precedence} & \textbf{Operator(s)} & \textbf{Assot.} \\ \hline
+1 & \texttt{::} & L → R \\ \hline
+2 & \texttt{a++}, \texttt{a--}, \texttt{type(a)}, \texttt{type\{a\}}, \texttt{a()}, \texttt{a[]}, 
+\texttt{a.b}, \texttt{a->b} & L → R \\ \hline
+3 & \texttt{++a}, \texttt{--a}, \texttt{+a}, \texttt{-a}, \texttt{!a}, \texttt{\~a}, 
+\texttt{(type)a}, \texttt{*a}, \texttt{\&a}, \texttt{sizeof}, 
+\texttt{co\_await}, \texttt{new}, \texttt{delete} & R → L \\ \hline
+4 & \texttt{a.*b}, \texttt{a->*b} & L → R \\ \hline
+5 & \texttt{a * b}, \texttt{a / b}, \texttt{a \% b} & L → R \\ \hline
+6 & \texttt{a + b}, \texttt{a - b} & L → R \\ \hline
+7 & \texttt{a << b}, \texttt{a >> b} & L → R \\ \hline
+8 & \texttt{a <=> b} & L → R \\ \hline
+9 & \texttt{a < b}, \texttt{a > b}, \texttt{a <= b}, \texttt{a >= b} & L → R \\ \hline
+10 & \texttt{a == b}, \texttt{a != b} & L → R \\ \hline
+11 & \texttt{a \& b} & L → R \\ \hline
+12 & \texttt{a \^ b} & L → R \\ \hline
+13 & \texttt{a | b} & L → R \\ \hline
+14 & \texttt{a \&\& b} & L → R \\ \hline
+15 & \texttt{a || b} & L → R \\ \hline
+
+\end{tabular}
+
+
+
+\definecolor{myBlue}{HTML}{000000}
+\definecolor{mysubBlue}{HTML}{333333}
+\definecolor{mysubsubBlue}{HTML}{323232}
+\section{Complex Datatypes}
+
+\subsection{Vectors}
+\begin{lstlisting}[style=codeexpert]
+std::vector<int> vec1; // Empty vector.
+std::vector<int> vec2(5, 10); // 5 elements, all 10.
+std::vector<int> vec5 = {1, 2, 3}; // From list.
+vec5.at(1); // Element at index 1 (bounds checked).
+vec5[1]; // Element at index 1 (no check).
+vec5.front(); // First element.
+vec5.back(); // Last element.
+vec5.data(); // Pointer to data.
+
+// Capacity
+vec5.empty(); // True if empty.
+vec5.size(); // Number of elements.
+vec5.max_size(); // Max possible elements.
+vec5.reserve(10); // Reserves space for 10.
+vec5.capacity(); // Current capacity.
+vec5.shrink_to_fit(); // Reduce capacity to size.
+
+// Modifiers
+vec5.clear(); // Removes all elements.
+vec5.push_back(42); // Add 42 to end.
+vec5.pop_back(); // Remove last element.
+vec5.resize(7); // Resize to 7.
+vec5.swap(vec4); // Swap with vec4.
+vec5.insert(vec5.begin(), 99); // Insert 99 at start.
+vec5.erase(vec5.begin()); // Remove first element.
+
+// Non-member Functions
+std::vector<int> vec6 = {1, 2, 3};
+std::vector<int> vec7 = {4, 5, 6};
+bool isEqual = (vec6 == vec7); // Check equality.
+bool isLess = (vec6 < vec7); // Lexicographical compare.
+\end{lstlisting}
+
+\subsection{Set}
+
+\begin{lstlisting}[style=codeexpert]
+std::set<int> set1; // Empty set.
+std::set<int> set2 = {3, 1, 4}; // From list.
+std::set<int> set3(set2); // Copy set.
+
+// Modifiers
+set1.insert(5); // Insert 5.
+set1.erase(5); // Remove 5.
+set1.clear(); // Remove all elements.
+set1.swap(set2); // Swap with set2.
+
+// Capacity
+set1.empty(); // True if empty.
+set1.size(); // Number of elements.
+set1.max_size(); // Max possible elements.
+
+// Lookup
+set1.find(3); // Iterator to 3 or end.
+set1.find(v) == set.end() // is true if v is not contained in set
+set1.count(3); // 1 if 3 exists, 0 otherwise.
+set1.lower_bound(3); // First element >= 3.
+set1.upper_bound(3); // First element > 3.
+set1.equal_range(3); // Pair of lower and upper bounds for 3.
+
+
+// Non-member Functions
+std::set<int> set4 = {2, 4, 6};
+std::set<int> set5 = {1, 3, 5};
+bool isEqual = (set4 == set5); // Check equality.
+bool isLess = (set4 < set5); // Lexicographical compare.
+\end{lstlisting}
+
+
+
+\subsection{String}
+
+\begin{lstlisting}[style=codeexpert]
+std::string str1; // Empty string.
+std::string str2 = "Hello"; // From C-string.
+std::string str4(5, 'a'); // "aaaaa" (5 'a's).
+
+// Modifiers
+str1.append("World"); // Append "World".
+str1 += "World"; // Append "World".
+str1.insert(0, "Hi "); // Insert "Hi " at start.
+str1.erase(3, 2); // Erase 2 chars from index 3.
+str1.replace(0, 2, "Hey"); // Replace first 2 chars with "Hey".
+str1.clear(); // Clear string.
+
+// Capacity
+str1.empty(); // True if empty.
+str1.size(); // Length of string.
+str1.capacity(); // Current storage capacity.
+str1.shrink_to_fit(); // Reduce capacity to size.
+str1.resize(10, 'x'); // Resize to 10 chars, fill with 'x'.
+
+// Element Access
+char c = str2.at(1); // Char at index 1 (bounds checked).
+char c2 = str2[1]; // Char at index 1 (no check).
+char front = str2.front(); // First char.
+char back = str2.back(); // Last char.
+char* data = str2.data(); // Pointer to char array.
+
+// Operations
+str2.find('l'); // First occurrence of 'l'.
+str2.rfind('l'); // Last occurrence of 'l'.
+str2.find_first_of("aeiou"); // First vowel.
+str2.find_last_of("aeiou"); // Last vowel.
+str2.substr(1, 3); // Substring from index 1, length 3.
+str2.compare("Hello"); // Compare with "Hello".
+
+// Non-member Functions
+std::string str5 = "abc";
+std::string str6 = "def";
+bool isEqual = (str5 == str6); // Check equality..
+\end{lstlisting}
+
+\subsection{Other usefull things}
+
+\begin{lstlisting}[style = codeexpert]
+isalpha(c);     // True if c is an alphabetic letter (A-Z, a-z)
+isdigit(c);     // True if c is a digit (0-9)
+isalnum(c);     // True if c is alphanumeric (A-Z, a-z, 0-9)
+islower(c);     // True if c is a lowercase letter (a-z)
+isupper(c);     // True if c is an uppercase letter (A-Z)
+ispunct(c);     // True if c is a punctuation character (e.g., ! @ # $ % & *)
+isgraph(c);     // True if c is a printable character excluding space
+isxdigit(c);    // True if c is a hexadecimal digit (0-9, A-F, a-f)
+
+// Character Conversion
+tolower(c);     // Converts c to lowercase (if applicable)
+toupper(c);     // Converts c to uppercase (if applicable)
+
+std::to_string(42);       // Converts int to string ("42")
+std::to_string(3.14);     // Converts double to string ("3.140000")
+std::to_string(100L);     // Converts long to string ("100")
+
+// String to Number
+std::stoi("42");          // Converts string to int (42)
+std::stol("100");         // Converts string to long (100)
+std::stof("3.14");        // Converts string to float (3.14)
+std::stod("2.718");     // Converts string to double (2.718)
+\end{lstlisting}
+
+
+
+
+\definecolor{myBlue}{HTML}{027690}
+\definecolor{mysubBlue}{HTML}{09a3c5}
+\definecolor{mysubsubBlue}{HTML}{38b7cb}
+\section{Custom Datatypes}
+
+\subsection{Struct}
+
+A struct is defined using the keyword \texttt{struct}. For example:
+
+\begin{lstlisting}[style=codeexpert]
+struct Point {
+    int x;  // X-coordinate
+    int y;  // Y-coordinate
+};
+\end{lstlisting}
+
+
+
+\subsection{Class}
+A class is defined using the keyword \texttt{class}. For example:
+
+\begin{lstlisting}[style=codeexpert]
+class Point {
+private:
+    int x; // X-coordinate
+    int y; // Y-coordinate
+
+public:
+    // Constructor
+    Point(int x_val, int y_val) {
+        x = x_val;
+        y = y_val;
+    }
+
+    // Method to display coordinates
+    void display() {
+        std::cout << x << ", " << y << std::endl;
+    }
+};
+\end{lstlisting}
+
+\subsection{Constructor} 
+Normally the constructor is defined like in the example above but there is also a more consise methods using a initializer list normally used in structs or if a header file is used.
+\\
+\begin{lstlisting}[style=codeexpert]
+// short way
+Point::Point(int x_val, int y_val) : x(x_val), y(y_val) {}
+
+
+// long way
+Point::Point(int x_val, int y_val) {
+    x = x_val; // Assign values inside the constructor body
+    y = y_val;
+}
+
+\end{lstlisting}
+
+\textbf{IMPORTANT} Never do this. This will "shadow" the actuall x in the function and intruduce werid bugs
+\begin{lstlisting}[style=codeexpert]
+Point::Point(int x, int y) {
+    x = x;
+    y = y;
+}
+\end{lstlisting}
+
+If this is the case one has to explicitly use the \textit{this} keyword like this:
+\begin{lstlisting}[style=codeexpert]
+Point::Point(int x, int y) {
+    this->x = x;
+    this->y = y;
+}
+\end{lstlisting}
+
+\begin{lstlisting}[style=codeexpert]
+    // 1. Default Constructor
+    Example() : value(0) { 
+        std::cout << "Default Constructor Called\n";
+    }
+    
+    // 2. Parameterized Constructor
+    Example(int v) : value(v) { 
+        std::cout << "Parameterized Constructor Called\n";
+    }
+    
+    // 3. Copy Constructor
+    Example(const Example &obj) : value(obj.value) { 
+        std::cout << "Copy Constructor Called\n";
+    }
+    
+    // 4. Delegating Constructor (Calls Parameterized Constructor)
+    Example(bool flag) : Example(flag ? 42 : 0) { 
+        std::cout << "Delegating Constructor Called\n";
+    }
+\end{lstlisting}
+
+
+\subsubsection{Operator Overloading}
+%% TODO for cin and cout and all that fanc bs +/- += you can use them for other opertor
+
+\subsection{CC $\And$ AA}
+\begin{itemize}
+    \item \textbf{Copy Constructor:}
+    \begin{itemize}
+        \item \texttt{type x = t;}
+        \item \texttt{type x(t);}
+    \end{itemize}
+
+    \item \textbf{Assignment Operator:}
+    \begin{itemize}
+        \item \texttt{x = y;}
+    \end{itemize}
+
+    
+\end{itemize}
+\subsubsection{Rule of Three}
+Type that manages dynamic memory needs:
+\begin{itemize}
+    \item Constructors
+    \item Destructor
+    \item Copy Constructor
+    \item Assignment Operator
+\end{itemize}
+
+\textbf{Rule of three}:
+if a class defines one of the last three, it must define all three.
+
+Solutions:
+\begin{itemize}
+    \item We make a real copy of all data (deep copy)
+    \item We do not allow copies
+\end{itemize}
+
+\begin{lstlisting}[style=codeexpert]
+    class num{
+    public:
+    num();
+    ~num();
+    num(const num& n) = delete; //no copy constructor
+    num& operator=(const num& n) = delete; //no assignment operator
+    }
+\end{lstlisting}
+
+
+\definecolor{myBlue}{HTML}{027690}
+\definecolor{mysubBlue}{HTML}{09a3c5}
+\definecolor{mysubsubBlue}{HTML}{38b7cb}
+\section{Function Structure}
+\subsection{Switch}
+\begin{lstlisting}[style=codeexpert]
+    switch (option) {
+        case 1: cout << "Option 1\n"; 
+          // No break; continues and also prints "Option 2"
+        case 2: cout << "Option 2\n"; 
+            break;  // Stops after this case
+
+        case 3: cout << "Option 3\n"; 
+            // No break; falls through to default case
+
+        default: cout << "Default case\n";  // Executes if no break before
+    }
+\end{lstlisting}
+
+\definecolor{myBlue}{HTML}{7a0000}
+\definecolor{mysubBlue}{HTML}{a30000}
+\definecolor{mysubsubBlue}{HTML}{cc0000}
+\section{Puzzle Guide}
+\subsection{Random common errors}
+\begin{itemize}
+    \item \% only works with ints;
+    \item negative binary numbers can represent one more number than their positive counterparts 
+    \item to check if a function can terminate also consider 'negative' unsigned integers
+    \item forgetting short-circuit evaluation
+\end{itemize}
+
+\definecolor{myBlue}{HTML}{003333}
+\definecolor{mysubBlue}{HTML}{004444}
+\definecolor{mysubsubBlue}{HTML}{006666}
+\section{Dynamic Data}
+\subsection{Pointer Arithmetic}
+\begin{itemize}
+    \item \textbf{Pointer Increment (\texttt{p++}):} 
+    Moving a pointer to the next element in memory. The pointer is incremented by the size of the data type it points to. For example:
+    \begin{lstlisting}[style=codeexpert]
+    int a[3] = {1, 2, 3};
+    int* p = a; // p points to a[0]
+    p++;        // p now points to a[1]
+    \end{lstlisting}
+
+    \item \textbf{Pointer Addition (\texttt{p + n}):}
+    Adding an integer to a pointer advances the pointer by \texttt{n} elements, where each element size is determined by the type. Example:
+    \begin{lstlisting}[style=codeexpert]
+    int a[3] = {1, 2, 3};
+    int* p = a; // p points to a[0]
+    int* q = p + 2; // q points to a[2]
+    \end{lstlisting}
+
+    \item \textbf{Pointer Subtraction (\texttt{p - n}):}
+    Subtracting an integer from a pointer moves it backward by \texttt{n} elements. Example:
+    \begin{lstlisting}[style=codeexpert]
+    int a[3] = {1, 2, 3};
+    int* p = &a[2]; // p points to a[2]
+    int* q = p - 1; // q points to a[1]
+    \end{lstlisting}
+
+\end{itemize}
+
+\subsection{Dereferencing with Pointer Arithmetic}
+Pointer arithmetic is often combined with dereferencing (\texttt{*}) to access or modify array elements. The syntax \texttt{*(p + n)} accesses the value at the \texttt{n}th offset from the pointer.
+
+\begin{lstlisting}[style=codeexpert]
+int a[5] = {10, 20, 30, 40, 50};
+int* p = a; // p points to a[0]
+std::cout << *(p + 2); // Outputs 30 (value at a[2])
+\end{lstlisting}
+
+\subsection{Pointers and Refs - short}
+\begin{lstlisting}[style = codeexpert]
+// Example of pointers
+int x = 10; 
+int* ptr = &x;    // '&' gets the address of x, ptr is a pointer to x
+*ptr = 20;        // '*' dereferences ptr to modify x
+
+// Example of references
+int& ref = x;     // 'ref' is a reference (alias) for x
+ref = 30;         // Modifying ref modifies x
+
+// Example of uninitialized and null pointers
+int* p;           // Accessing p is undefined behaviour
+int* q = nullptr; // q explicitly points nowhere
+\end{lstlisting}
+
+\subsection{Relationship Between Arrays and Pointers}
+In C++, arrays and pointers are closely related. The name of an array (e.g., \texttt{a}) acts as a constant pointer to the first element of the array (\texttt{a[0]}). Pointer arithmetic can traverse the array:
+\begin{lstlisting}[style=codeexpert]
+int a[4] = {5, 10, 15, 20};
+int* p = a; // p points to a[0]
+for (int i = 0; i < 4; ++i) {
+    std::cout << *(p + i) << " "; // Access each element
+}
+// Output: 5 10 15 20
+\end{lstlisting}
+
+\subsection{Smart Pointers}
+See end of code section.
+
+\definecolor{myBlue}{HTML}{d88403}
+\definecolor{mysubBlue}{HTML}{fd9e0b}
+\definecolor{mysubsubBlue}{HTML}{fdac0b}
+\section{Base conversion}
+
+\begin{tabular}{|c|p{3cm}|p{4cm}|}
+\hline
+\textbf{Dec} & \textbf{Bin} & \textbf{Hex} \\ \hline
+0 & \texttt{0000} & \texttt{0x0} \\ \hline
+1 & \texttt{0001} & \texttt{0x1} \\ \hline
+2 & \texttt{0010} & \texttt{0x2} \\ \hline
+3 & \texttt{0011} & \texttt{0x3} \\ \hline
+4 & \texttt{0100} & \texttt{0x4} \\ \hline
+5 & \texttt{0101} & \texttt{0x5} \\ \hline
+6 & \texttt{0110} & \texttt{0x6} \\ \hline
+7 & \texttt{0111} & \texttt{0x7} \\ \hline
+8 & \texttt{1000} & \texttt{0x8} \\ \hline
+9 & \texttt{1001} & \texttt{0x9} \\ \hline
+10 & \texttt{1010} & \texttt{0xA} \\ \hline
+11 & \texttt{1011} & \texttt{0xB} \\ \hline
+12 & \texttt{1100} & \texttt{0xC} \\ \hline
+13 & \texttt{1101} & \texttt{0xD} \\ \hline
+14 & \texttt{1110} & \texttt{0xE} \\ \hline
+15 & \texttt{1111} & \texttt{0xF} \\ \hline
+\end{tabular}
+
+\vspace{0.5cm}
+\begin{tabular}{|c|p{2cm}|p{2cm}|p{2cm}|}
+\hline
+\textbf{\(h_n\)} & \(16^1\) & \(16^2\) & \(16^3\) \\\hline
+1 & 16 & 256 & 4096 \\\hline
+2 & 32 & 512 & 8192 \\\hline
+3 & 48 & 768 & 12288 \\\hline
+4 & 64 & 1024 & 16384 \\\hline
+5 & 80 & 1280 & 20480 \\\hline
+6 & 96 & 1536 & 24576 \\\hline
+7 & 112 & 1792 & 28672 \\\hline
+8 & 128 & 2048 & 32768 \\\hline
+9 & 144 & 2304 & 36864 \\\hline
+A & 160 & 2560 & 40960 \\\hline
+B & 176 & 2816 & 45056 \\\hline
+C & 192 & 3072 & 49152 \\\hline
+D & 208 & 3328 & 53248 \\\hline
+E & 224 & 3584 & 57344 \\\hline
+F & 240 & 3840 & 61440 \\\hline
+\end{tabular}
+
+\begin{itemize}
+    \item $2^0 = 1$
+    \item $2^1 = 2$
+    \item $2^2 = 4$
+    \item $2^3 = 8$
+    \item $2^4 = 16$
+    \item $2^5 = 32$
+    \item $2^6 = 64$
+    \item $2^7 = 128$
+    \item $2^8 = 256$
+    \item $2^9 = 512$
+    \item $2^{10} = 1024$
+    \item $2^{11} = 2048$
+    \item $2^{12} = 4096$
+\end{itemize}
+
+\subsection{Negative Binary to Decimal Conversion Example}
+
+\textbf{Example: Convert \textcolor{red}{11111011} (8-bit binary) to decimal}
+
+\begin{enumerate}
+    \item \textbf{Step 1:} Confirm 8 bits $\rightarrow$ \textcolor{red}{11111011}
+    \item \textbf{Step 2:} Check sign (MSB = 1, so it's negative)
+    \item \textbf{Step 3:} Take 2's complement $\rightarrow$ \textcolor{red}{11111011} - 1 = \textcolor{red}{11111010}, flip $\rightarrow$ \textcolor{red}{00000101}
+    \item \textbf{Step 4:} Convert to decimal $\rightarrow$ \textcolor{red}{00000101} = 5
+    \item \textbf{Step 5:} Apply negative sign $\rightarrow$ \textcolor{red}{-5}
+\end{enumerate}
+
+\definecolor{myBlue}{HTML}{000000}
+\definecolor{mysubBlue}{HTML}{333333}
+\definecolor{mysubsubBlue}{HTML}{323232}
+\subsection{Program Errors}
+\subsection{Syntactic Error}
+\begin{itemize}
+    \item Violation of language syntax rules.
+    \item Detected by compiler or interpreter during parsing.
+    \item Examples: Missing semicolon, wrong parentheses placement.
+    \item Effect: Code doesn’t run.
+\end{itemize}
+
+\section{Semantic Error}
+\begin{itemize}
+    \item Error in the logic or meaning of the code.
+    \item Detected during program execution (runtime).
+    \item Examples: Dividing by zero, incorrect variable operations.
+    \item Effect: Code runs but produces incorrect or unexpected output.
+\end{itemize}
+\subsection{Compiler Errors}
+\begin{itemize}
+    \item \textbf{Syntax Errors:} Violations of the rules of the programming language.
+    \begin{lstlisting}[style=codeexpert]
+    int x = 5 // Missing semicolon
+    \end{lstlisting}
+
+    \item \textbf{Type Errors:} Using variables or functions with incompatible types.
+    \begin{lstlisting}[style=codeexpert]
+    int x = 10;
+    std::string s = x; // Compiler error: type mismatch
+    \end{lstlisting}
+
+    \item \textbf{Undeclared Identifiers:} Using variables or functions that have not been declared.
+    \begin{lstlisting}[style=codeexpert]
+    std::cout << y; // Compiler error: 'y' is not declared
+    \end{lstlisting}
+
+    \item \textbf{Linker Errors:} Missing function definitions or unresolved external references during the linking phase.
+    \begin{lstlisting}[style=codeexpert]
+    extern void foo(); // Declaration
+    foo(); // Compiler error: no definition provided
+    \end{lstlisting}
+\end{itemize}
+
+
+
+
+\subsection{Runtime Errors}
+\begin{itemize}
+    \item \textbf{Invalid Memory Access:} Accessing memory outside the bounds of an array or using dangling pointers.
+    \begin{lstlisting}[style=codeexpert]
+    int arr[3] = {1, 2, 3};
+    std::cout << arr.at(5); // Runtime error: out-of-bounds access
+    //arr[5] would just be undefined behaviour - but potentially lead to a crash
+    \end{lstlisting}
+
+    \item \textbf{Division by Zero:} Performing division with a zero denominator.
+    \begin{lstlisting}[style=codeexpert]
+    int x = 10, y = 0;
+    std::cout << x / y; // Runtime error: division by zero
+    \end{lstlisting}
+
+    \item \textbf{Null Pointer Dereference:} Dereferencing a pointer that points to \texttt{nullptr}.
+    \begin{lstlisting}[style=codeexpert]
+    int* p = nullptr;
+    std::cout << *p; // Runtime error: null pointer dereference
+    \end{lstlisting}
+\end{itemize}
+
+\subsection{Undefined behaviour}
+\begin{itemize}
+    \item Dereferencing a null or dangling pointer
+    \item Accessing an array out of bounds
+    \item Signed integer overflow
+    \item Using an uninitialized variable
+    \item Modifying a variable multiple times in an expression (e.g., \texttt{i = i++;})
+    \item Data races in multithreaded programs
+    \item Returning a reference to a local variable
+    \item Missing a \texttt{return} statement in a function with a non-void return type
+\end{itemize}
+
+
+
+\section{Lists,Vectors,Arrays}
+\subsubsection{std::list}
+\begin{itemize}[leftmargin=1.5cm]
+    \item \textbf{Size:} Dynamic
+    \item \textbf{Memory Layout:} Non-contiguous
+    \item \textbf{Access:} Slow (sequential traversal)
+    \item \textbf{Search:} Slow
+    \item \textbf{Insertion:} Fast at arbitrary positions
+    \item \textbf{Insertion (End):} Fast
+    \item \textbf{Duplicates:} Allowed
+    \item \textbf{Use Case:} Frequent insertions/removals
+\end{itemize}
+
+\subsubsection{std::set}
+\begin{itemize}[leftmargin=1.5cm]
+    \item \textbf{Size:} Dynamic
+    \item \textbf{Memory Layout:} Non-contiguous
+    \item \textbf{Access:} Not applicable (no direct indexing)
+    \item \textbf{Search:} Fast (balanced trees)
+    \item \textbf{Insertion:} Moderate
+    \item \textbf{Insertion (End):} Moderate (based on ordering)
+    \item \textbf{Duplicates:} Not allowed
+    \item \textbf{Use Case:} Maintaining sorted, unique elements
+\end{itemize}
+
+\subsubsection{std::vector}
+\begin{itemize}[leftmargin=1.5cm]
+    \item \textbf{Size:} Dynamic
+    \item \textbf{Memory Layout:} Contiguous
+    \item \textbf{Access:} Fast (direct indexing)
+    \item \textbf{Search:} Moderate
+    \item \textbf{Insertion:} Slow at arbitrary positions
+    \item \textbf{Insertion (End):} Fast (amortized)
+    \item \textbf{Duplicates:} Allowed
+    \item \textbf{Use Case:} Resizable collections with fast random access
+\end{itemize}
+
+\subsubsection{std::array}
+\begin{itemize}[leftmargin=1.5cm]
+    \item \textbf{Size:} Fixed at compile time
+    \item \textbf{Memory Layout:} Contiguous
+    \item \textbf{Access:} Fast (direct indexing)
+    \item \textbf{Search:} Moderate
+    \item \textbf{Insertion:} Not applicable (size is fixed)
+    \item \textbf{Insertion (End):} Not applicable
+    \item \textbf{Duplicates:} Allowed
+    \item \textbf{Use Case:} Fixed-size collections
+\end{itemize}
+
+
+
+
+
+
+
+
+
+\section{Overlapping Intervals}
+
+\[
+\text{\underline{Overlapping intervals:}}
+\]
+
+\[
+[a_1, a_2] \quad ; \quad [b_1, b_2]
+\]
+
+\[
+a_1 \leq b_2 \quad \& \quad b_1 \leq a_2
+\]
+

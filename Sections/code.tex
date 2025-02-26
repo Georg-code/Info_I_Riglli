@@ -1,0 +1,731 @@
+
+\definecolor{myBlue}{HTML}{3a0077}
+\definecolor{mysubBlue}{HTML}{5710a3}
+\definecolor{mysubsubBlue}{HTML}{883ada}
+
+
+\section{Snippets}
+
+
+
+
+
+\subsection{Overflow Check}
+
+\begin{lstlisting}[style = codeexpert]
+bool additionWillOverflow(int a, int b) {
+    if (b > 0 && a > INT_MAX - b) return true;
+    if (b < 0 && a < INT_MIN - b) return true;
+    return false;
+}
+\end{lstlisting}
+
+
+
+
+
+
+\subsubsection{Decrypt (shift)}
+
+
+\begin{lstlisting}[style = codeexpert]
+char decrypt_char(const char encrypted_char, int shift) {
+  char decrypted_char = encrypted_char;
+  if (encrypted_char >= 'a' && encrypted_char <= 'z') {
+    decrypted_char = (encrypted_char - 'a' + shift) % 26 + 'a';
+  }
+
+  return decrypted_char;
+}
+\end{lstlisting}
+
+\subsubsection{Bubble sort}
+\begin{lstlisting}[style = codeexpert]
+    for (size_t i = 0; i < vec.size() - 1; ++i) {
+        for (size_t j = 0; j < vec.size() - i - 1; ++j) {
+            if (vec[j] > vec[j + 1]) {
+                std::swap(vec[j], vec[j + 1]); // Swap elements
+            }
+        }
+    }
+\end{lstlisting}
+
+\subsubsection{Function using istream}
+\begin{lstlisting}[style = codeexpert]
+//formats input into vector
+  std::vector<char> alphabet_fromistream(std::istream& in) {
+  // input format: 4 a b c d 
+  unsigned int size;
+  in >> size;
+  std::vector<char> a(size);
+  for (unsigned int i = 0; i < size; ++i)
+    in >> a[i];
+  return a; // [a b,c,d]
+}
+\end{lstlisting}
+
+\subsubsection{Stream funktion operator overloading }
+\begin{lstlisting}[style = codeexpert]
+std::ostream& operator<<(std::ostream& out, const DualNumber& dn) {
+  return out << "(" << dn.a 
+             << ((dn.b < 0.0) ? " - " : " + ") 
+             << "e*" << std::abs(dn.b) << ")";
+}
+
+std::istream& operator>>(std::istream& in, DualNumber& dn) {
+  return in >> std::skipws >> dn.a >> std::ws >> dn.b;
+}
+\end{lstlisting}
+
+\subsubsection{Turn number (123) to (321)}
+\begin{lstlisting}[style = codeexpert]
+int reverseNumber(int num) {
+    int reversed = 0;
+    while (num > 0) {
+        reversed = reversed * 10 + num % 10;
+        num = num / 10;
+    }
+    return reversed;
+}
+\end{lstlisting}
+
+
+\subsection{Vectors and Matrices}
+\subsubsection{Read/Print Vector}
+\begin{lstlisting}[style = codeexpert]
+using vec = std::vector<int>;
+void read_vector(vec& v) {
+  int size;
+  std::cin >> size;
+  v = vec(size);
+  for (int i = 0; i < int(v.size()); ++i) {
+    std::cin >> v[i];
+  }
+}
+
+void print_matrix(const mat& m) {
+  std::cout << "m " << m.size() << " " << m[0].size() << "\n";
+  for (int row = 0; row < int(m.size()); ++row) {
+    for (int col = 0; col < int(m[row].size()); ++col) {
+      std::cout << m[row][col] << " ";
+    }
+    std::cout << "\n";
+  }
+}
+\end{lstlisting}
+
+\subsubsection{Read/Print Matrix}
+\begin{lstlisting}[style = codeexpert]
+using vec = std::vector<int>;
+using mat = std::vector<vec>;
+
+    void read_matrix(mat& m) {
+  int n_rows, n_cols;
+  std::cin >> n_rows >> n_cols;
+
+  m.resize(n_rows);
+  for (int row = 0; row < int(m.size()); ++row) {
+    m[row].resize(n_cols);
+    for (int col = 0; col < int(m[row].size()); ++col) {
+      std::cin >> m[row][col];
+    }
+  }
+}
+
+void print_matrix(const mat& m) {
+  std::cout << "m " << m.size() << " " << m[0].size() << "\n";
+  for (int row = 0; row < int(m.size()); ++row) {
+    for (int col = 0; col < int(m[row].size()); ++col) {
+      std::cout << m[row][col] << " ";
+    }
+    std::cout << "\n";
+  }
+}
+\end{lstlisting}
+
+
+
+
+
+
+\subsubsection{FindMax in Vector}
+\begin{lstlisting}[style = codeexpert]
+int findMax(const std::vector<int>& vec) {
+    if (vec.empty()) return 0; // Handle empty vector case
+    int maxVal = vec[0];
+    for (int i = 1; i < vec.size(); i++) {
+        if (vec[i] > maxVal) {
+            maxVal = vec[i];
+        }
+    }
+    return maxVal;
+}
+\end{lstlisting}
+
+
+\subsubsection{GRID: Neighbors Exist? Bounds check}
+\begin{lstlisting}[style = codeexpert]
+bool checkAllNeighborsExist(const std::vector<std::vector<int>>& grid, int row, int col) {
+    int rows = grid.size();
+    int cols = grid[0].size();
+    
+    int directions[8][2] = {{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}};
+    
+    for (auto& dir : directions) {
+        int newRow = row + dir[0];
+        int newCol = col + dir[1];
+        if (newRow < 0 || newRow >= rows || newCol < 0 || newCol >= cols) {
+            return false; // Neighbor is out of bounds
+        }
+    }
+    return true;
+}
+\end{lstlisting}
+
+\subsection{Trees}
+\subsubsection{FindMax}
+\begin{lstlisting}[style = codeexpert]
+// POST: Find and return the maximum leaf node value in a (sub)tree starting 
+//       at root. If root is the empty tree, return 0.
+unsigned int findMax(const Node* root) {
+  unsigned int max = 0;
+  
+  // If the tree is empty, return 0
+  if (root == nullptr) {
+    return 0;
+  }
+  
+  // If the current node is a leaf, return its value
+  if (root->isLeaf()) {
+    return root->value;
+  }
+  
+  // Otherwise, the current node is not a leaf, and we search for the max 
+  // in its children
+  for (Node* child : root->children) {
+    unsigned int childMax = findMax(child);
+    
+    if (childMax > max) {
+      max = childMax;
+    }
+  }
+  
+  return max;
+}
+\end{lstlisting}
+
+\subsubsection{Deletion of subtree}
+\begin{lstlisting}[style = codeexpert]
+// PRE:  subroot not null
+// POST: subtree with root subtree memory leak free deleted
+void delete_subtree(Node* subroot) {
+  if (subroot->left != nullptr) {
+    delete_subtree(subroot->left);
+    subroot->left = nullptr;
+  }
+  
+  if (subroot->right != nullptr) {
+    delete_subtree(subroot->right);
+    subroot->right = nullptr;
+  }
+  
+  delete subroot;
+}
+\end{lstlisting}
+
+\subsubsection{Prune}
+\begin{lstlisting}[style = codeexpert]
+// PRE:  value != 0
+// POST: Delete a leaf node with given value from the (sub)tree starting at root.
+//       If a leaf node is deleted, remove it from its parent.
+//       If an inner node becomes empty, remove it from its  parent and delete it.
+//       Return true if and only if the (sub)tree starting at root was deleted.
+bool deleteLeaf(Node* root, unsigned int value) {
+  if (root == nullptr) {
+    return false;
+  }
+  if (root->isLeaf() && root->value == value ) {
+    delete root;
+    return true;
+  }
+  for (unsigned int i = 0; i < root->children.size(); ++i) {
+    if (deleteLeaf(root->children[i], value)) {
+      root->removeFromChildren(root->children[i]);
+      
+      if (root->children.size() == 0) {
+        delete root;
+        
+        return true;
+      }
+    }
+  }
+  return false;
+}
+\end{lstlisting}
+
+
+
+\subsubsection{Tree Depth}
+\begin{lstlisting}[style = codeexpert]
+VARIANT 1
+struct TreeNode {
+  unsigned int data; //INV: between 0 and 9
+  TreeNode *left;
+  TreeNode *right;
+};
+/***
+ * PRE: node is a valid pointer to an instance for kind TreeNode, and not nullptr
+ * POST: returns the maximum depth of the binary tree starting from node
+ * 
+ * Examples:
+ *      3     -> 1
+ *
+ *      5
+ *     / \ 
+ *    2   7   -> 3
+ *       /
+ *      4
+ ***/
+unsigned int get_max_depth(TreeNode *node){
+  assert(node != nullptr);
+  unsigned int depthRight = 0;
+  unsigned int depthLeft = 0;
+  if (node->left){
+    depthLeft = get_max_depth(node->left);
+  }
+  if (node->right){
+    depthRight = get_max_depth(node->right);
+  }
+  if (depthLeft > depthRight){
+    return depthLeft + 1;
+  } else {
+    return depthRight + 1;
+  }
+}
+
+VARIANT 2
+unsigned int noOfLevels(Node* node) {
+  // TO DO
+  if (node == nullptr)
+    return 0;
+  return std::max(noOfLevels(node->left), noOfLevels(node->right)) + 1;
+}
+
+
+\end{lstlisting}
+
+
+\subsection{Linked List}
+\subsubsection{Insert Element in Linked list}
+\begin{lstlisting}[style = codeexpert]
+void insertAtValue(Node*& head, int value, int pos) {
+    if (!head) {
+        head = new Node(value);
+        return;
+    }
+    Node* temp = head;
+
+    // Insert at the beginning if pos is 0
+    if (pos == 0) {
+        Node* newNode = new Node(value);
+        newNode->next = head;
+        head = newNode;
+        return;
+    }
+    // Insert at the random position
+    temp = head;
+    for (int i = 0; i < pos - 1; i++) {
+        temp = temp->next;
+    }
+    
+    Node* newNode = new Node(value);
+    newNode->next = temp->next;
+    temp->next = newNode;
+}
+\end{lstlisting}
+\columnbreak
+\subsubsection{Deconstruct Linked list}
+\begin{lstlisting}[style = codeexpert]
+void deconstructList(Node* head) {
+    if (head == nullptr) return;  // Base case: If head is null, return
+    deconstructList(head->next); // Recursive call to delete next node first
+    delete head;
+}
+\end{lstlisting}
+
+\subsubsection{Delete Node with Value}
+\begin{lstlisting}[style = codeexpert]
+void deleteByValue(Node*& head, int value) {
+    if (!head) {
+        return; // If the list is empty, return
+    }
+    // Special case: if the node to be deleted is the head
+    if (head->data == value) {
+        Node* temp = head;
+        head = head->next;
+        delete temp;
+        return;
+    }
+    // Traverse the list to find the node with the value
+    Node* prev = head;
+    Node* curr = head->next;
+    while (curr) {
+        if (curr->data == value) {
+            prev->next = curr->next;
+            delete curr;
+            return;
+        }
+        prev = curr;
+        curr = curr->next;
+    }
+}
+\end{lstlisting}
+% \subsubsection{Deconstruct Linked list}
+% \begin{lstlisting}[style = codeexpert]
+% void deconstructList(Node* head) {
+%     if (!head) return;  // Base case: If head is null, return
+%     deconstructList(head->next); // Recursive call to delete next node first
+%     cout << "Deleting node with value: " << head->data << endl;
+%     delete head;
+% }
+
+% \end{lstlisting}
+
+\subsection{Numbers}
+\subsection{Int to string}
+
+\begin{lstlisting}[style = codeexpert]
+std::string intToString(int num) {
+    std::string result = "";
+    bool isNegative = (num < 0);
+    num = isNegative ? -num : num;
+    do {
+        result = char('0' + (num % 10)) + result;
+        num /= 10;
+    } while (num > 0);
+    return isNegative ? "-" + result : result;
+}
+\end{lstlisting}
+\subsection{Integer rounding}
+\begin{lstlisting}[style = codeexpert]
+int a = 7, b = 3;
+int flooring = a / b; // flooring
+int ceiling = (a + b - 1) / b; // ceiling
+int nearest = (a + b / 2) / b; // nearest
+\end{lstlisting}
+
+\subsubsection{Decimal to Binary}
+\begin{lstlisting}[style = codeexpert]
+// PRE: decimal is a non-negative integer (unsigned int)
+// POST: Binary representation of decimal is printed to standard output
+
+void binary_conv(unsigned int decimal) {
+    unsigned int m = 0;  // Exponent
+    unsigned int power = 1;  // Power of two
+
+    for (; power <= decimal / 2; m++) {
+        power *= 2;
+    }  // Find the highest power of two
+
+    for (unsigned int i = 0; i <= m; ++i) {
+        std::cout << decimal / power;
+        decimal %= power;
+        power /= 2;
+    }  // Output the binary representation bit by bit
+}
+
+\end{lstlisting}
+\columnbreak
+\subsubsection{Base Conversion}
+\begin{lstlisting}[style = codeexpert]
+// PRE: A number >= 0 in base 10, and a base 1 < b < 10
+//
+// POST: Return the number in base b, i.e., return the number whose digits 
+//       are the digits of the representation of the input number n in base b
+//
+// Examples:
+//    * 10 2 ~~> 1010
+//    * 14 9 ~~> 15
+unsigned int convert_base(unsigned int n, unsigned int b) {
+  unsigned int basetenposition = 1;
+  unsigned int num = 0;
+  while(n!=0){
+    num += (n%b)*(basetenposition);
+    n = n /b;
+    basetenposition*=10;
+  }
+  return num;
+}
+
+\end{lstlisting}
+
+\subsubsection{Binary Expansion}
+\begin{lstlisting}[style = codeexpert]
+// Converts a fractional part of a number (0 <= x < 2) into its binary representation
+void convert_to_binary(double x) {
+    // Check if input is within the valid range
+    if (x < 0.0 || x >= 2.0) {
+        std::cout << "Input out of bounds\n";
+        return;
+    }
+    // Determine the initial bit based on x and output it
+    int b = (x >= 1) ? 1 : 0;
+    std::cout << b << ".";
+    // Convert the fractional part to binary representation (up to 15 bits)
+    for (int i = 1; i < 16; ++i) {
+        x = (x - b) * 2;  // Subtract the current bit value and multiply by 2
+        b = (x >= 1) ? 1 : 0;  // Determine the next binary bit
+        std::cout << b;
+    }
+    std::cout << "\n";
+}
+
+
+\end{lstlisting}
+
+\subsubsection{Prime number}
+\begin{lstlisting}[style = codeexpert]
+bool isPrime(int n) {
+    if (n <= 1) return false;
+    for (int i = 2; i < n; i++) {
+        if (n % i == 0) {
+            return false;
+        }
+    }
+    return true;
+}
+\end{lstlisting}
+
+\subsubsection{Greatest Common Denominator, Least Common Multiple}
+\begin{lstlisting}[style = codeexpert]
+using namespace std;
+
+int gcd(int a, int b) {
+    while (b != 0) {
+        int temp = b;
+        b = a % b;
+        a = temp;
+    }
+    return a;
+}
+
+int lcm(int a, int b) {
+    return (a / gcd(a, b)) * b;
+}
+\end{lstlisting}
+\columnbreak
+\subsection{Recursion}
+\subsubsection{Bitstrings up to n}
+\begin{lstlisting}[style = codeexpert]
+// Recursive function to generate all bitstrings up to length n
+void generate_bitstrings(int n, std::string current, std::vector<std::string>& result) {
+    // Base case: Add the current bitstring to the result
+    result.push_back(current);
+
+    // If current length is less than n, continue generating longer bitstrings
+    if (current.length() < n) {
+        generate_bitstrings(n, current + "0", result);
+        generate_bitstrings(n, current + "1", result);
+    }
+}
+
+std::vector<std::string> all_bitstrings_up_to_n(int n) {
+    std::vector<std::string> result;
+    // Start the recursion with an empty string
+    generate_bitstrings(n, "", result);
+    return result;
+}
+\end{lstlisting}
+
+\subsubsection{Queens on chessboard}
+(Just for basic idea of backtracking)
+
+\begin{lstlisting}[style = codeexpert]
+bool solveNQueens(std::vector<std::vector<int>>& board, int col, int n) {
+    if (col >= n) return true;  // Base case: If all queens are placed, return true
+
+    for (int row = 0; row < n; row++) {
+        if (isSafe(board, row, col, n)) {
+            board[row][col] = 1;  // Place queen
+            if (solveNQueens(board, col + 1, n)) return true;  // Recur to place next queen
+            board[row][col] = 0; // Backtrack if placing queen here didn’t work
+        }
+    }
+    return false;  // No valid placement found in this column
+}
+
+\end{lstlisting}
+
+\subsubsection{Rod}
+\begin{lstlisting}[style = codeexpert]
+// pre: p.size() >= length + 1
+// post: return the best value that can be attained by
+//       cutting a rod of the given length and given
+//       prices per length
+unsigned int bestValue(const prices& p, unsigned int length){
+    if(length <=0){
+    return 0;
+  }
+  int max = 0;
+  for (unsigned k = 1; k <= length; k++) {
+    int value = p[k] + bestValue(p, length-k);
+    if(value > max){
+      max = value;
+    }
+  }
+  return max;
+}
+
+\end{lstlisting}
+\columnbreak
+\subsubsection{All permutations}
+\begin{lstlisting}[style = codeexpert]
+StringSet all_permutations_2(const std::string& s) {
+  int n = s.size();
+  // base case: empty string
+  if (n == 0) {
+    return StringSet("");
+  }
+  // init empty result
+  StringSet result;
+  // split string into first character and remaining characters
+  std::string first_character = s.substr(0, 1);
+  std::string remaining_string = s.substr(1);
+  // generate all permuations of remaining string
+  StringSet all_remaining_permutations = all_permutations_2(remaining_string);
+  // insert first character at every location in every permutation
+  for (int j = 0; j < all_remaining_permutations.size(); ++j) {
+    for (int i = 0; i < n; ++i) {
+      result.insert(all_remaining_permutations[j].substr(0, i) + 
+                    first_character +
+                    all_remaining_permutations[j].substr(i));
+    }
+  }
+  return result;
+}
+\end{lstlisting}
+
+\subsection{Smart Pointers}
+\begin{lstlisting}[style = codeexpert]
+class Demo {
+public:
+    int value;
+    Demo(int val) : value(val) {
+        std::cout << "Demo object created with value: " << value << std::endl;
+    }
+    ~Demo() {
+        std::cout << "Demo object with value " << value << " destroyed" << std::endl;
+    }
+    void show() {
+        std::cout << "Value: " << value << std::endl;
+    }
+};
+
+void uniquePtrExample() {
+    std::cout << "\n=== Unique Pointer Example ===\n";
+    // Creating a unique pointer
+    std::unique_ptr<Demo> uniqueDemo = std::make_unique<Demo>(10);
+    uniqueDemo->show();
+    
+    // Transferring ownership using std::move
+    std::unique_ptr<Demo> movedDemo = std::move(uniqueDemo);
+    if (!uniqueDemo) {
+        std::cout << "uniqueDemo is now null after move\n";
+    }
+    movedDemo->show();
+}  // movedDemo goes out of scope and deletes the object
+
+void sharedPtrExample() {
+    std::cout << "\n=== Shared Pointer Example ===\n";
+    std::shared_ptr<Demo> shared1 = std::make_shared<Demo>(20);
+    {
+        std::shared_ptr<Demo> shared2 = shared1; // Shared ownership
+        std::cout << "Shared pointer count: " << shared1.use_count() << std::endl;
+        shared2->show();
+    } // shared2 goes out of scope, shared1 is still valid
+    
+    std::cout << "Shared pointer count after inner scope: " << shared1.use_count() << std::endl;
+}  // shared1 goes out of scope and deletes the object
+
+
+\end{lstlisting}
+
+\subsection{Overlapping intervals}
+
+\begin{lstlisting}[style = codeexpert]
+// PRE: [a1, b1], [a2, b2] are (generalized) intervals,
+//      with [a, b] := [b, a] if a > b
+// POST: returns true if [a1, b1], [a2, b2] overlap
+bool intervals_overlap(int a1, int b1, int a2, int b2) {
+    return max(a1, b1) >= min(a2, b2) 
+           && min(a1, b1) <= max(a2, b2);
+}
+\end{lstlisting}
+
+
+\section{Every little thing is gonna be alright, just copy, be happy}
+
+\subsubsection{number into digits}
+\begin{lstlisting}[style = codeexpert]
+std::vector<int> splitDigits(int num) {
+    std::vector<int> digits;
+    
+    // Handle negative numbers
+    if (num < 0) {
+        num = -num;
+    }
+
+    // Extract digits from the number
+    while (num > 0) {
+        digits.push_back(num % 10); // Get the last digit
+        num /= 10; // Remove the last digit
+    }
+
+    // Reverse the vector to get digits in correct order
+    std::reverse(digits.begin(), digits.end());
+
+    return digits;
+}
+
+\end{lstlisting}
+
+
+\subsubsection{Integral approx}
+\begin{lstlisting}[style = codeexpert]
+double integral_approx(double lb, double ub,
+                       const std::function<double(double)>& func,
+                       double delta = .0001) {
+    double result = 0;
+    uint64_t numDeltas = static_cast<uint64_t>((ub - lb) / delta);
+    for (int i = 0; i < numDeltas; i++) {
+        double begin = lb + i * delta;
+        double end = lb + (i + 1) * delta;
+        result += delta * (func(begin) + func(end)) / 2;
+    }
+    return result;
+}
+
+
+\end{lstlisting}
+
+\subsubsection{Reverse a linked list}
+\begin{lstlisting}[style = codeexpert]
+// Function to reverse a linked list recursively
+void reverse(Node *previous, Node *current) {
+    // Base case: If we reach the last node
+    if (current->next == nullptr) {
+        current->next = previous;  // Point the last node to the previous node
+        previous->next = nullptr;  // Ensure the old link is broken
+        start = current;           // Update the head of the list
+        return;
+    } else {
+        // Recursive call moving forward in the list
+        reverse(current, current->next);
+        
+        // After recursion unwinds, update the links
+        current->next = previous;
+        previous->next = nullptr;  // Ensure the old link is broken
+    }
+}
+
+\end{lstlisting}

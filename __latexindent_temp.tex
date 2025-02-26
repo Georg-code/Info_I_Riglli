@@ -1,0 +1,748 @@
+\documentclass[numerate]{cheatsheet}
+\usepackage{blindtext}
+\usepackage{multicol}
+\usepackage{tabularx}
+\usepackage{empheq}
+\usepackage{makecell}
+\usepackage{xcolor}
+\usepackage{scalerel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{color,soul}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{bigstrut}
+\usepackage{gensymb}
+\usepackage{hhline}
+\usepackage{mathtools}
+
+\usepackage[center]{}
+
+
+
+\doctitle{Zusammenfassung \\Mechanik II}
+\author{Nina Schmidt - nischmidt$@$ethz.ch}
+
+
+\begin{document}
+
+\renewcommand{\multirowsetup}{\centering} %to align center inside the table
+\setlength{\tabcolsep}{4pt}
+%New command
+\newcommand{\cbreak}{%
+    \vfill\null\columnbreak%
+}
+
+%New command
+\makeatletter
+\newcommand{\pushright}[1]{\ifmeasuring@#1\else\omit\hfill$\displaystyle#1$\fi\ignorespaces}
+\newcommand{\pushleft}[1]{\ifmeasuring@#1\else\omit$\displaystyle#1$\hfill\fi\ignorespaces}
+\makeatother
+
+%New definition
+\def\doubleunderline#1{\underline{\underline{#1}}}
+
+\section{Repetition}
+    \subsection{Einheitskreis}    
+        \begin{scriptsize}
+            \begin{center}
+            \begin{tabular}{|c|c|c|c|c|c|c|}
+                \hline
+                $\alpha$ & \thead{$\scriptstyle 0^{\degree}$ \\ $\scriptstyle [0]$} & \thead{$\scriptstyle 30^{\degree}$ \\ $\scriptstyle \left[\pi / 6\right]$} & \thead{$ \scriptstyle 45^{\degree}$ \\ $\scriptstyle [\pi / 4]$} & \thead{ $\scriptstyle 60^{\degree}$ \\ $\scriptstyle [\pi / 3]$} & \thead{$\scriptstyle 90^{\degree}$ \\ $\scriptstyle [\pi / 2]$} & \thead{$\scriptstyle 180^{\degree}$ \\ $\scriptstyle [\pi]$}\\
+                \hline
+                \rule[-2.5ex]{0pt}{7ex}$sin(\alpha)$ & $0$ & $\frac{1}{2}$ & $\frac{\sqrt{2}}{2}$ & $\frac{\sqrt{3}}{2}$ & $1$ & $0$\\
+                \hline
+                \rule[-2.5ex]{0pt}{7ex} $cos(\alpha)$ & $1$ & $\frac{\sqrt{3}}{2}$ & $\frac{\sqrt{2}}{2}$ & $\frac{1}{2}$ & $0$ & $-1$\\
+                \hline
+                \rule[-2.5ex]{0pt}{7ex} $tan(\alpha)$ & $0$ & $\frac{\sqrt{3}}{2}$ & $1$ & $\sqrt{3}$ & - & $0$\\
+                \hline
+            \end{tabular}
+            \begin{empheq}[box=\fbox]{align*}
+                sin^2(\alpha) + cos^2(\alpha) = 1
+            \end{empheq}
+            \begin{empheq}[box=\fbox]{align*}
+                cos(\alpha + \frac{\pi}{2}) \: \widehat{=} \: -sin(\alpha) \quad &\mid \quad cos(\alpha -\frac{\pi}{2}) \: \widehat{=} \: sin(\alpha)
+                \\ cos (\frac{\pi}{2} - \alpha) \: \widehat{=} \: sin(\alpha) \quad &\mid \quad sin(\alpha-\frac{\pi}{2}) \: \widehat{=} \: -cos(\alpha)
+                \\ sin(\frac{\pi}{2} -\alpha) \: &\widehat{=} \: cos(\alpha)
+            \end{empheq}
+        \end{center}
+        \end{scriptsize}    
+
+    \subsection{Kreuzprodukt (Vektorprodukt)}    
+        \begin{scriptsize}
+            \begin{empheq}[box=\fbox]{align*}
+                &a \times b = \begin{pmatrix} a_1 \\ a_2 \\ a_3 \end{pmatrix} \times \begin{pmatrix} b_1 \\ b_2 \\ b_3 \end{pmatrix} = \begin{pmatrix} a_2b_3 - a_3b_2 \\ a_3b_1 - a_1b_3 \\ a_1b_2 - a_2b_1  \end{pmatrix} \quad a,b \in \mathbb{R}^3
+                \\ &  a \times b = -b \times a
+                \\ & \Vert a \times b \Vert = \Vert a \Vert \cdot \Vert b \Vert \cdot sin(\measuredangle[a,b]) \: \widehat{=} \: \text{Fläche d. Parallelogramms}
+            \end{empheq}
+        \end{scriptsize}
+
+    \subsection{Redutkion Linienverteilte Kraft}    
+        \begin{scriptsize}
+            \begin{center}
+                \includegraphics[width = 0.7\linewidth]{MECH_LinienverteilteKraft}
+            \end{center}    
+        \end{scriptsize}
+
+    \section{Koordinatentransformation}
+        \begin{scriptsize}
+            \begin{center}
+                \begin{tabular}{|c|c|c|c|}
+                    \hline
+                    \null & \cellcolor{Lavender}Kartesisch & Zylindrisch & Sphärisch\\
+                    \hline
+                    \rule[-2ex]{0pt}{5ex} $x$ & \cellcolor{Lavender}$x$ & $\rho \cdot \text{cos}(\varphi)$ & $r \cdot \text{sin}(\theta)\text{cos}(\psi)$\\
+                    \hline
+                    \rule[-2ex]{0pt}{5ex} $y$ & \cellcolor{Lavender}$y$ & $\rho \cdot \text{sin}(\varphi)$ & $r \cdot \text{sin}(\theta)\text{sin}(\psi)$\\
+                    \hline
+                    \rule[-2ex]{0pt}{5ex} $z$ & \cellcolor{Lavender}$z$ & $z$ & $r \cdot \text{cos}(\theta)$\\
+                    \hhline{|=|=|=|=|}
+                    \rule[-2.5ex]{0pt}{7ex} $\rho$ & \cellcolor{Lavender}$\sqrt{x^2 + y^2}$ & $\rho$ & $r \cdot \text{sin}(\theta)$\\
+                    \hline
+                    \rule[-2.5ex]{0pt}{7ex} $\varphi$ & \cellcolor{Lavender}$\text{arctan}(\frac{y}{x})$ & $\varphi$ & $\psi$\\
+                    \hline
+                    \rule[-2.5ex]{0pt}{7ex} $z$ & \cellcolor{Lavender}$z$ & $z$ & $r\cdot \text{cos}(\theta)$\\
+                    \hhline{|=|=|=|=|}
+                    \rule[-2.5ex]{0pt}{7ex} $r$ & \cellcolor{Lavender}$\sqrt{x^2+y^2+z^2}$ & $\sqrt{\rho^2+z^2}$ & $r$\\
+                    \hline
+                    \rule[-2.5ex]{0pt}{8.5ex} $\theta$ & \cellcolor{Lavender}$\text{arctan} \left(\frac{\sqrt{x^2+y^2}}{z}\right)$ & $\text{arctan} (\frac{\rho}{z})$ & $\theta$\\
+                    \hline
+                    \rule[-2.5ex]{0pt}{7ex} $\psi$ & \cellcolor{Lavender}$\text{arctan} (\frac{y}{x})$ & $\varphi$ & $\psi$\\
+                    \hline
+                \end{tabular}
+            \end{center}
+        \end{scriptsize}    
+\cbreak
+
+    \subsection{Allgemein}
+        \begin{scriptsize}
+            \begin{empheq}{align*}
+                &\text{Ortsvektor: } \qquad \underline{r}(t)
+                \\ &\text{Geschwindigkeit: } \qquad \underline{v}(t) = \dot{\underline{r}}(t) = \dot{s} \cdot \underline{\tau}
+                \\ &\text{Beschleunigung: } \qquad \underline{a} (t) = \dot{\underline{v}}(t) = \ddot{\underline{r}}(t)
+                \\ &\text{Schnelligkeit: } \qquad \dot{s} = \vert \underline{v}(t) \vert = \vert \dot{\underline{r}} \vert
+                \\ &\text{Tangentialer Einheitsvektor: } \qquad \underline{\tau} = \frac{\underline{v}}{\vert \underline{v} \vert}
+            \end{empheq}
+        \end{scriptsize}
+        
+        
+    \subsection{Kartesisch}
+        \begin{scriptsize}
+            \begin{empheq}{align*}
+                &\text{Ortsvektor: } \qquad \underline{r}(t) = x(t)\underline{e}_x + y(t)\underline{e}_y + z(t)\underline{e}_z
+                \\ &\text{Geschwindigkeit: } \qquad \underline{v}(t) = \dot{\underline{r}}(t) = \dot{x}\underline{e}_x + \dot{y}\underline{e}_y + \dot{z}\underline{e}_z
+                \\ & \text{Schnelligkeit: } \qquad \dot{s} = |\underline{v}(t)| = x(t)\underline{e}_x + y(t)\underline{e}_y + z(t)\underline{e}_z
+            \end{empheq}
+        \end{scriptsize}
+        
+    \subsection{Zylindrisch}
+        \begin{scriptsize}
+            \begin{empheq}{align*}
+                & \text{Ortsvektor: } \qquad \underline{r}(t) = \rho(t)\underline{e}_{\rho} (\varphi(t)) + z(t) \underline{e}_z
+                \\ &\text{Geschwindigkeit: } \qquad \underline{v}(t) = \dot{\underline{r}}(t) = \dot{\rho}(t)\underline{e}_{\rho} + \rho\dot{\varphi}(t)\underline{e}_{\varphi} + \dot{z}(t)\underline{e}_{z}
+                \\ & \text{Schnelligkeit: } \qquad \dot{s} = |\underline{v}(t)| = \sqrt{\dot{\rho}^2 + (\rho \dot{\varphi})^2 + \dot{z}^2}
+                \\ & \text{Einheitsvektor in Abhängigkeit: } \qquad \underline{e}_{\rho} = cos(\varphi)\underline{e}_x + sin(\varphi)\underline{e}_y
+                \\ & \underline{e}_{\varphi} = - sin(\varphi)\underline{e}_x + cos(\varphi)\underline{e}_y \quad \mid \quad \underline{e}_z \to \text{konstant}
+            \end{empheq}
+        \end{scriptsize} 
+        
+    \subsection{Sphärisch}
+        \begin{scriptsize}
+            \begin{empheq}{align*}
+               & \text{Ortsvektor: } \qquad \underline{r}(t) = r(t)\underline{e}_r(\theta (t), \: \psi(t))
+               \\ & \text{Geschwindigkeit: } \qquad \underline{v}(t) = \dot{\underline{r}} (t)= \dot{r}(t)\underline{e}_r + r\dot{\theta}(t)\underline{e}_{\theta} + r \cdot sin(\theta)\dot{\psi}(t)\underline{e}_{\psi}
+               \\ & \text{Schnelligkeit: } \qquad \dot{s} = |\underline{v}(t)| = \sqrt{\dot{r}^2 + (r\dot{\theta})^2 + (r \cdot sin(\theta)\dot{\psi})^2}  
+               \\ & \text{Einheitsvektor in Abhängigkeit: } 
+               \\ & \underline{e}_r = sin(\theta)cos(\psi) \underline{e}_x + sin(\theta)sin(\psi) \underline{e}_y + cos(\theta) \underline{e}_z
+               \\ & \underline{e}_{\theta} = cos(\theta)cos(\psi) \underline{e}_x + cos(\theta)sin(\psi) \underline{e}_y - cos(\theta) \underline{e}_z
+               \\ & \underline{e}_{\psi} = -sin(\psi)\underline{e}_x + cos(\psi) \underline{e}_y 
+            \end{empheq}
+        \end{scriptsize}    
+
+
+    \section{Lagerbindungen und Lagerkräfte}    
+    \begin{center}
+        \includegraphics[width = 0.6\linewidth]{MECH_Lagerarten}
+    \end{center}
+
+    \section{Beanspruchung in geraden Balken}
+        \begin{minipage}{0.3\linewidth}
+            \begin{scriptsize}
+                \includegraphics[width = 0.9\linewidth]{MECH_Balken}
+            \end{scriptsize}
+        \end{minipage}
+        \begin{minipage}{0.68\linewidth}
+            \begin{scriptsize}
+                \begin{tabular}{|c|c|c|}
+                    \hline
+                    Symbol & Name & Beanspruchung auf:\\
+                    \hhline{|=|=|=|}
+                    $N$ & Normalkraft & \thead{\scriptsize Zug ($N > 0$) \\ \scriptsize Druck ($N<0$)}\\
+                    \hline
+                    $Q_2, Q_3$ & Querkräfte & Schub\\
+                    \hline
+                    $T$ & Torsionsmoment & Torsion\\
+                    \hline
+                    $M_2, M_3$ & Biegemomente & Biegung\\
+                    \hline
+                \end{tabular}
+            \end{scriptsize}      
+        \end{minipage}    
+
+    \subsection{Bestimmung der Beanspruchung}
+        \begin{scriptsize}
+            \begin{enumerate}
+                \item Lagerkräfte am Gesamtsystem bestimmen
+                \item Körper schneide, Laufvariable und Schnittgrössen einführen
+                \item Gleichgewichtsbedingungen für das abgegrenzte System aufstellen $\to$ Schnittgrössen berechnen $\to$ Momentenbedingung bzgl. Schnittpunkt!
+                \item Je nach Aufgabenstellung $\to$ Beanspruchungsdiagramm zeichnen
+            \end{enumerate}
+        \end{scriptsize}    
+\cbreak
+
+    \subsection{Differentialbeziehungen}
+        \begin{scriptsize}
+            Gelten für \underline{gerade Stabträger}. $q$ steht für Kraftverteilung:
+            \[
+            \begin{dcases}
+                Q'_y = \frac{d}{dx} Q_y = -q_y \\
+                M'_z = \frac{d}{dx} M_z = -Q_y \\
+                M''_z = \frac{d^2}{dx^2} M_z  =q_y
+            \end{dcases}
+            \quad \implies \quad 
+            \begin{dcases}
+                Q'_z = \frac{d}{dx}Q_z = -q_z \\
+                M_y' = \frac{d}{dx} M_y = Q_z \\
+                M_y'' = \frac{d^2}{dx^2} M_y = -q_z
+            \end{dcases}
+            \]
+            \textcolor{Red}{\textbf{Wichtig:}} Niemals über unstetige Belastungen (Einzelkräfte und Einzelmomente) integrieren! \\Bestimmung der Integrationskonstanten aus folgenden Randbedingungen:  
+            \begin{center}
+                \vspace{2mm} \includegraphics[width = 0.7\linewidth]{MECH_Lagerart_dx}
+            \end{center}
+            \textbf{Beachte:}
+            \\ $Q =$ positive Lagerkraft, wenn Laufvariable \underline{weg} vom Lager
+            \\ $Q =$ negative Lagerkraft, wenn Laufvariable \underline{zum} Lager    
+        \end{scriptsize}   
+        
+    \section{Beanspruchung im gekrümmten Balken}
+        \begin{scriptsize}
+            \begin{minipage}{0.5\linewidth}
+                \includegraphics[width = 0.8\linewidth]{MECH_Beanspruchung_krummerBalken}
+            \end{minipage}   
+            \begin{minipage}{0.48\linewidth}
+                Es lohnt sich, \textbf{in Polarkoordinaten} \\zu rechnen.
+                \\Symbole sind dieselben, wie bei Abs. 4
+            \end{minipage}
+        \end{scriptsize} 
+     
+    \subsection{Bestimmung der Beanspruchung}
+        \begin{scriptsize}
+            \begin{enumerate}
+                \item Lagerkräfte bestimmen
+                \item Balken schneiden und neue Laufvariable $\varphi$ einführen \\(Achtung, hier Winkel, resp. Bogenmass!) 
+                \item Beanspruchungskomponenten einführen
+                \item Gleichgewichtsbedingungen aufstellen $\to$ bei Integration eine neue Integrationsvariable $\alpha$ einführen und von 0 bis $\varphi$ integrieren
+            \end{enumerate}
+        \end{scriptsize}
+        
+    \subsection{Differentialbeziehungen}  
+        \begin{scriptsize}
+            Die Vorzeichen stehen in direkter Beziehung zur Richtung der geführten Schnittgrössen. 
+            \\\textbf{Diese gelten für gekrümmte Balken:}
+            \begin{empheq}[box=\fbox]{align*}
+                Q'_r - N + R \cdot q_r &= 0\\
+                Q'_z + R \cdot q_z &= 0\\
+                M'_r - T + R \cdot Q_z &= 0\\
+                M'_z - R \cdot Q_r &= 0
+            \end{empheq}
+        \end{scriptsize}
+     
+    \section{Beanspruchungsdiagramme}
+        \begin{scriptsize}
+            \begin{center}
+                \begin{tabular}{|c|c|c|}
+                    \hline
+                    \cellcolor{Salmon}Lastfall: & Einfluss der Querkraft & Einfluss auf Biegemoment\\
+                    \hhline{|=|=|=|}
+                    Einzelmoment & - & Sprung \\
+                    \hline
+                    Einzelkraft & Sprung & Linear / Knick\\
+                    \hline
+                    Gleichförm. Kraftverteilung & Linear & Quadratisch\\
+                    \hline
+                    Dreiecksverteilung & Quadratisch & Kubisch\\
+                    \hline
+                \end{tabular}
+                \includegraphics[width = 0.8\linewidth]{MECH_Beanspruchungsdiagramm1}
+            \end{center}    
+        \end{scriptsize}    
+    \cbreak    
+
+    \subsection{Lösungsmethoden}
+        \begin{scriptsize}
+            \begin{itemize}
+                \item \textbf{Knotengleichgewicht}
+                \begin{enumerate}
+                    \item Lagerkräfte bestimmen
+                    \item Gleichgewichtsbedingungen an jedem Knoten aufstellen $\to$ Stabkräfte als Zugkräfte einführen (Pendelstütze)
+                    \item Gleichgewichtssysteme auflösen $\to$ Stabkräfte $S_i$
+                    \item $S>0 \to$ Belastung auf Zug
+                    \\$S<0 \to$ Belastung auf Druck
+                \end{enumerate}
+                \item \textbf{Dreikräfteschnitt}
+                \begin{enumerate}
+                    \item Lagerkräfte bestimmen
+                    \item An geeigneter Stelle max. 3 Stäbe durchschneiden und Stabkräfte $S_i$ einführen 
+                    \item Momentengleichgewicht am Schnittpunkt zweier unbekannten Stabkräfte $\to$ Berechnung der dritten Stabkraft
+                    \item Komponentenbedingung $\to$ Bestimmung der beiden anderen unbekannten Stabkräfte
+                \end{enumerate}
+                \item \textbf{Prinzip der virtuellen Leistung (PdvL)}
+                \begin{enumerate}
+                    \item Stab entfernen und Stabkraft $S_i$ als Zugkraft (+) einführen
+                    \item Zulässige virtuelle Bewegung einführen, d.h. eine Bewegung einführen, die mit den kinematischen Bedingungen (Lager) des Fachwerks verträglich ist
+                    \item Bestimmung der Geschwindigkeit in dne Knoten, in denen Kräfte wirken
+                    \item Aus dem Prinzip der virtuellen Leistung folgt: $P = 0 \to $ Berechnung der unbekannten Stabkraft $S_i$ 
+                    \\\textbf{Wichtig! Immer nur einen Stab entfernen!}
+                \end{enumerate}
+            \end{itemize}
+        \end{scriptsize}
+
+    \section{Spannungen}
+        \begin{scriptsize}
+            \begin{itemize}
+                \item \textbf{Definitoin Spannung:}
+                \\$\sigma :=$ Kraft pro Fläche $= Pa = \frac{N}{m^2}$
+            \end{itemize}
+        \end{scriptsize}
+      
+    \subsection{Spannungsvektor $\underline{s}$}
+        \begin{scriptsize}
+            \begin{center}
+                \includegraphics[width = 0.7\linewidth]{MECH_Spannungsvektor}
+                \begin{empheq}[box=\fbox]{align*}
+                    \underline{s} &= \underline{s}(\underline{x}, \underline{n}) \qquad \qquad \underline{x} \text{ Ortsvektor, } \underline{n} \text{ Orientierung}
+                    \\ &= \sigma_n + \underline{n} + \tau \cdot \underline{t} \qquad \qquad \textcolor{Red}{\underline{n} \text{ und } \underline{t} \text{ sind \underline{normiert}!}}
+                    \\ &= \doubleunderline{T} \cdot \underline{n} \qquad \qquad \textcolor{Red}{\underline{n} \text{ ist \underline{normiert}}}
+                    \\ \sigma_n &= (\doubleunderline{T} \cdot \underline{n}) \cdot \underline{n} \qquad \qquad \textcolor{Red}{\underline{n} \text{ ist normiert und } \sigma \text{ ist nur der Betrag}}
+                    \\ &= \underline{s} \cdot \underline{n}
+                    \\ \tau_n &= (\doubleunderline{T} \cdot \underline{n}) \cdot \underline{t} \qquad \qquad \textcolor{Red}{\underline{n} \text{ und } \underline{t} \text{ sind normiert und } \sigma \text{ nur Betrag}}
+                    \\ &= \underline{s} \cdot \underline{t}
+                    \\ &= \vert \underline{s} - \sigma_n \cdot \underline{n} \vert
+                \end{empheq}
+            \end{center}
+        \end{scriptsize}    
+
+    \subsection{Spannungstensor 2D $\doubleunderline{T}$}
+        \begin{scriptsize}
+            \begin{itemize}
+                \item Ein Spannungstensor ist definiert durch einen Spannungsvektor $\underline{s}$ von drei senkrecht aufeinanderstehenden Flächenelement in einem Punkt
+                \begin{empheq}[box=\fbox]{align*}
+                    \text{zur Erinnerung: } \underline{s}(\underline{n}) = \doubleunderline{T} \cdot \underline{n}
+                \end{empheq}
+                \item \textbf{Koordinatentransformation eines 2D-Tensors:}
+            \end{itemize}
+            \begin{center}
+                \includegraphics[width = 0.8\linewidth]{MECH_Spannungstensor}
+            \end{center}
+            \begin{empheq}[box=\fbox]{align*}
+                \sigma_{\xi} &= cos^2(\alpha) \cdot \sigma_x + sin^2(\alpha) \cdot \sigma_y + 2 \cdot sin(\alpha)cos(\alpha) \cdot \tau_{xy}
+                \\ \sigma_{\eta} &= sin^2(\alpha) \cdot \sigma_x + cos^2(\alpha) \cdot \sigma_y - 2\cdot sin(\alpha)cos(\alpha) \cdot \tau_{xy}
+                \\ \tau_{\xi \eta} &= (\sigma_y - \sigma_x) sin(\alpha)cos(\alpha) + \tau_{xy} \left(cos^2(\alpha)-sin^2(\alpha)\right)
+            \end{empheq}
+        \end{scriptsize}
+        
+    \subsection{Normal- und Schubspannungen 2D}
+        \begin{scriptsize}
+            \begin{empheq}[box=\fbox]{align*}
+                \sigma_n(\alpha) &= cos^2(\alpha) \cdot \sigma_x + sin^2(\alpha) \cdot \sigma_y + 2 \cdot sin(\alpha)cos(\alpha) \cdot \tau_{xy}
+                \\ \tau_n(\alpha) &= (\sigma_y - \sigma_x) \cdot sin(\alpha)cos(\alpha) + \tau_{xy} \left(cos^2(\alpha) - sin^2(\alpha) \right)
+            \end{empheq}    
+        \end{scriptsize}    
+
+    \subsection{Mohrscher Spannungskreis (hier 2D)}
+        \begin{scriptsize}
+            \begin{center}
+                \includegraphics[width = 0.7\linewidth]{MECH_MSpannungskreis}
+            \end{center}
+            \begin{itemize}
+                \item \textbf{Positive Normalspannungen:} (Zug $\Rightarrow \sigma > 0$) wirken in Richtung der \\Flächennormalen $\underline{n}$
+                \item \textbf{Positive Schubspannungen:} (Druck $\Rightarrow \tau > 0$) wirken in Richtung von $\underline{t}$
+            \end{itemize}
+        \end{scriptsize}    
+
+    \subsection{Hauptwerte und Hauptrichtungen 2D}
+        \begin{scriptsize}
+            \begin{itemize}
+                \item \textbf{Hauptwerte $\zeta$ 2D:}
+                \begin{empheq}[box=\fbox]{align*}
+                    \zeta_{1,2} &= \frac{1}{2} (\sigma_x + \sigma_y) \pm \sqrt{\frac{1}{4} (\sigma_x - \sigma_y)^2 + (\tau_{xy})^2}
+                    \\ &= \text{Mittelpunkt $\pm$ Radius}
+                \end{empheq}
+                \item \textbf{Hauptrichtungen 2D:}
+                \begin{empheq}[box=\fbox]{align*}
+                    &\textbf{Winkel der 1. HR: } \quad \alpha_1 = \frac{1}{2}\cdot arctan\left(\frac{2\tau_{xy}}{\sigma_x-\sigma_y}\right)
+                    \\ &\textbf{1. HR im Bereich: } \quad 0 \leq \alpha_1 \leq 90^\circ
+                    \\ &\to \text{wenn nicht im Bereich, mit } 90^\circ \text{ addieren od. subtrahieren} 
+                    \\ &\textbf{2. HR: } \quad \alpha_2 = \alpha_1 + 90^\circ
+                    \\~\\ &\to \alpha_1 \text{ in } \sigma_{\xi}(\alpha) \text{ und } \sigma_{\eta}(\alpha) \text{ einsetzen für Hauptwerte $\zeta_{1,2}$}
+                \end{empheq}
+                \item \textbf{Maximale Schubspannung 2D:}
+                \\$\Rightarrow$ gilt bei \underline{ebenem Spannungszustand} oder wenn \underline{z} = Hauptrichtung:
+                \begin{empheq}[box=\fbox]{align*}
+                    \tau_{\text{max}} &= \sqrt{\frac{1}{4}(\sigma_x - \sigma_y)^2 + (\tau_{xy})^2} \quad \mid \quad \alpha_{\tau, \text{max}} = \alpha_1 \pm 90
+                \end{empheq}
+            \end{itemize}
+        \end{scriptsize}    
+     
+    \subsection{Hauptwerte und Hauptrichtungen 3D}
+        \begin{scriptsize}
+            \begin{itemize}
+                \item \textbf{Hauptwerte $\lambda_i$ 3D}:
+                \\ $\lambda_i$ = Eigenwerte, $n_i$ = Eigenvektoren $\Rightarrow$ Löse $det (\doubleunderline{T}-\lambda \cdot \mathbb{I}) = 0$
+            \end{itemize}
+            \begin{empheq}[box=\fbox]{align*}
+                &det(\doubleunderline{T} - \lambda \cdot \mathbb{I})=0 \quad \Rightarrow \quad  \lambda^3- A_1\lambda^2 - A_2\lambda-A_3 = 0
+                \\ & A_1 = \sigma_x + \sigma_y + \sigma_z
+                \\ & A_2 = -\sigma_x\sigma_y - \sigma_y\sigma_z-\sigma_x\sigma_z + (\tau_{xy})^2 + (\tau_{xz})^2 + (\tau_{yz})^2
+                \\ & A_3 = det(\doubleunderline{T})
+            \end{empheq}
+            \begin{itemize}
+                \item \textbf{Hauptrichtungen $n_i$ 3D:}
+                    \begin{empheq}[box=\fbox]{align*}
+                        \text{Löse: } \quad (\doubleunderline{T} - \lambda_i\cdot \mathbb{I}) \cdot n_i = 0
+                    \end{empheq}
+                \item \textbf{Maximale Schubspannung 3D:}
+                    \begin{empheq}[box=\fbox]{align*}
+                        \tau_{\text{max}} = \frac{1}{2}[\text{max}(\lambda_i) - \text{min}(\lambda_i)]
+                    \end{empheq}
+                \cbreak
+                \item \textbf{weitere Beziehungen:}
+            \end{itemize}
+            \begin{tabular}{|c|c|c|c|c|}
+                \hline
+                \thead{\scriptsize Haupt- \\\scriptsize spannungs- \\ \scriptsize richtung} & $\tau$ & $-\tau$ & $\underline{n}_i$ & $\underline{t}$ \\
+                \hline
+                x & $\sigma_y$ & $\sigma_z$ & \thead{$\scriptstyle cos(\alpha_i)\underline{e}_y$ \\ $\scriptstyle+ sin(\alpha_i)\underline{e}_z$} & $-sin(\alpha)\underline{e}_y + cos(\alpha)\underline{e}_z$\\
+                \hline
+                y & $\sigma_x$ & $\sigma_z$ & \thead{$\scriptstyle cos(\alpha_i)\underline{e}_x$ \\ $\scriptstyle+ sin(\alpha_i)\underline{e}_z$} & $-sin(\alpha)\underline{e}_x + cos(\alpha)\underline{e}_z$\\
+                \hline
+                z & $\sigma_x$ & $\sigma_z$ & \thead{$\scriptstyle cos(\alpha_i)\underline{e}_x$ \\ $\scriptstyle+ sin(\alpha_i)\underline{e}_y$} & $-sin(\alpha)\underline{e}_x + cos(\alpha)\underline{e}_y$\\
+                \hline
+            \end{tabular}
+            \begin{empheq}[box=\fbox]{align*}
+                \sigma_{\varphi} &\simeq -\frac{R}{t} \cdot P_i
+                \\ \text{mit } P_i = \text{ Innendruck; } &R = \text{ Radius; } t = \text{ Wandstärke} 
+            \end{empheq}
+            \begin{empheq}[box=\fbox]{align*}
+                &\textbf{Determinante berechnen: } 
+                \\ &\begin{pmatrix}
+                    a & b & c \\
+                    d & e & f \\
+                    g & h & i \\ 
+                \end{pmatrix} = aei + bfg + cdh - gec - hfa - idb
+            \end{empheq}
+        \end{scriptsize}    
+
+    \subsection{Gleichgewichtsbedingungen}
+        \begin{scriptsize}
+            Wenn Komponenten vom Spannungstensor $\doubleunderline{T}$ als Funktion von $x,y,z$ gegeben sind, gelten \\die untenstehenden Beziehungen. \textbf{Ziel:} Normalspannungsverteilung zu finden. \\$f$ steht für die Raumkraftdichte, z.B. Gewichtskraft.
+            \begin{empheq}[box=\fbox]{align*}
+                \partial_x (\sigma_x) + \partial_y(\tau_{xy}) + \partial_z(\tau_{xz}) + f_x &= 0
+                \\\partial_x(\tau_{xy}) + \partial_y(\sigma_y) + \partial_z(\tau_{yz}) + f_y &= 0
+                \\ \partial_x(\tau_{xz}) + \partial_y(\tau_{yz}) + \partial_z(\sigma_z) + f_z &= 0
+            \end{empheq}
+        \end{scriptsize}   
+        
+    \section{Verzerrungen}   
+        \begin{scriptsize}
+            \begin{center}
+                \includegraphics[width = 0.6\linewidth]{MECH_Verzerrungen}
+            \end{center}
+        \end{scriptsize}
+
+    \subsection{Verzerrungstensor}
+        \begin{scriptsize}
+            \begin{empheq}[box=\fbox]{align*}
+                \left[ \doubleunderline{E}\right]_{xy} &= \begin{pmatrix}
+                    \varepsilon_x & \varepsilon_{xy} & \varepsilon_{xz}\\
+                    * & \varepsilon_y & \varepsilon_{yz}\\
+                    * & * & \varepsilon_z\\
+                \end{pmatrix}
+                \\ &= \begin{pmatrix}
+                    u_{x,x} & \frac{1}{2}(u_{x,y} + u_{y,x}) & \frac{1}{2}(u_{x,z} + u_{z,x})\\
+                    * & u_{y,y} & \frac{1}{2} (u_{z,y} + u_{y,z})\\
+                    * & * & u_{z,z}\\
+                \end{pmatrix}
+            \end{empheq}
+        \end{scriptsize}    
+
+    \subsection{Schubwinkel $\gamma$}   
+        \begin{scriptsize}            
+            \begin{minipage}{0.58\linewidth}
+                \begin{empheq}{align*}
+                    \gamma_{xy} &= 2 \cdot \varepsilon_{xy}\\
+                    \gamma_{xz} &= 2 \cdot \varepsilon_{xz}\\
+                    \gamma_{yz} &= 2 \cdot \varepsilon_{yz}\\
+                \end{empheq}
+            \end{minipage}
+            \begin{minipage}{0.4\linewidth}
+                \begin{empheq}{align*}
+                    \underline{v}(\underline{n}) &= \doubleunderline{E} \cdot \underline{n}\\
+                    \varepsilon_n &= \underline{v} \cdot \underline{n}\\
+                    \varepsilon_{nt} &= \vert \underline{v} - \varepsilon_n \cdot \underline{n} \vert
+                 \end{empheq}
+            \end{minipage}
+            \[
+                \varepsilon_{xy} =
+            \begin{dcases}
+                > 0, \; \gamma \downarrow\\
+                < 0, \; \gamma \uparrow\\
+            \end{dcases}
+            \]
+        \end{scriptsize}
+
+    \section{Stoffgesetze}   
+        \begin{scriptsize}
+            \begin{empheq}[box=\fbox]{align*}
+                \sigma = \frac{F}{A} \quad \mid \quad \sigma &= E \cdot \varepsilon \quad \mid \quad G = \frac{E}{2(1+v)}
+                \\\Delta l = \frac{1}{E} \int\limits_{0}^{l} &\frac{N(x)}{A(x)} \ dx = \frac{F}{A\cdot E} \cdot l
+            \end{empheq}
+            $E$ = Elastizitätsmodul $[\frac{N}{m^2}] \to$ Beziehung zwischen $\sigma_x$ und $\varepsilon_x$;\\
+            $v$ = Querdehnungszahl $[\varnothing] \to$ Poissonzahl, Materialkonstante, $0 \leq v \leq 0.5$;\\
+            $G$ = Schubmodul $[\frac{N}{m^2}] \to$ Beziehung zwischen $\tau_{xy} \text{ und } \varepsilon_{xy}$\\
+            $K$ = Kompressionsmodul $[\frac{N}{m^2}] \to$ Beziehung zwischen Volumendehnung und Druck 
+        \end{scriptsize}
+    \cbreak    
+
+    \subsection{Temperaturabhängigkeit}
+        \begin{scriptsize}
+            \begin{itemize}
+                \item \textbf{3D-Fall:}
+            \end{itemize}
+            \begin{empheq}[box=\fbox]{align*}
+                \varepsilon_x &= \frac{1}{E} \left[ \sigma_x - v(\sigma_y + \sigma_z)\right] + \alpha \cdot \Delta T\\
+                \varepsilon_y &= \frac{1}{E} \left[ \sigma_y - v(\sigma_x + \sigma_z)\right] + \alpha \cdot \Delta T\\
+                \varepsilon_z &= \frac{1}{E} \left[ \sigma_z - v(\sigma_x + \sigma_y)\right] + \alpha \cdot \Delta T
+            \end{empheq}
+            \begin{empheq}[box=\fbox]{align*}
+                \varepsilon_{xy} &= \frac{1}{2} \gamma_{xy} = \frac{\tau_{xy}}{2G} \quad \mid \quad \varepsilon_{yz} = \frac{1}{2} \gamma_{yz} = \frac{\tau_{yz}}{2G}\\ 
+                \varepsilon_{xz} &= \frac{1}{2} \gamma_{xz} = \frac{\tau_{xz}}{2G} \quad \mid \quad \varepsilon_v = spur(\doubleunderline{E}) = \varepsilon_x + \varepsilon_y + \varepsilon_z\\
+                \sigma_x &= \frac{E}{1+v} \left[ \varepsilon_x + \frac{v}{1-2v} (\varepsilon_x + \varepsilon_y + \varepsilon_z)\right] - \frac{E}{1-2v} \cdot \alpha \Delta T\\
+                \sigma_y &= \frac{E}{1+v} \left[ \varepsilon_y + \frac{v}{1-2v} (\varepsilon_x + \varepsilon_y + \varepsilon_z)\right] - \frac{E}{1-2v} \cdot \alpha \Delta T\\
+                \sigma_z &= \frac{E}{1+v} \left[ \varepsilon_z + \frac{v}{1-2v} (\varepsilon_x + \varepsilon_y + \varepsilon_z)\right] - \frac{E}{1-2v} \cdot \alpha \Delta T
+            \end{empheq}
+            \begin{itemize}
+                \item \textbf{2D-Fall:}
+            \end{itemize}    
+            \begin{empheq}[box=\fbox]{align*}
+                \varepsilon_x = \frac{1}{E}(\sigma_x - v \cdot \sigma_y) \quad &\mid \quad \varepsilon_y = \frac{1}{E}(\sigma_y - v \cdot \sigma_x)\\
+                \varepsilon_{xy} &= \frac{1+v}{E} \cdot \tau_{xy}\\
+                \sigma_x = \frac{E}{1-v^2} (\varepsilon_x + v\varepsilon_y) \quad &\mid \quad \sigma_y = \frac{E}{1-v^2} (\varepsilon_y + v\varepsilon_x)\\
+                \tau_{xy} &= \frac{E\cdot \varepsilon_{xy}}{1+v}
+            \end{empheq}
+        \end{scriptsize}   
+        
+    \section{Balkenbiegung}
+    \subsection{Schwerpunkt}
+        \begin{scriptsize}
+            \begin{itemize}
+                \item \textbf{Körper mit einfachen (zusammengesetzten) Geometrien:}
+                \begin{enumerate}
+                    \item Körper in einfache Geometrien (Teilflächen od. Volumen) aufteilen
+                    \item Koordinatensystem und Ursprung definieren
+                    \item Teilflächen $A_i$ berechnen
+                    \item Schwerpunkt einer jeden Teilfläche / Teilvolumens bestimmen
+                    \item Folgende Formeln anwenden:
+                \end{enumerate}
+            \end{itemize}
+            $$ x_s = \frac{\sum (x_i \cdot A_i)}{\sum A_i} \quad \mid \quad y_s = \frac{\sum (y_i \cdot A_i)}{\sum A_i} \quad \mid \quad z_s = \frac{\sum (z_i \cdot A_i)}{\sum A_i}$$
+            \begin{itemize}
+                \item \textbf{Allgemeine Formel:}
+                \\ beliebiges Koordinatensystem ($e_{\eta}, e_{\xi}$):
+                $$ \eta_s = \frac{1}{A} \iint_A \eta \ dA \quad \mid \quad \xi_s = \frac{1}{A} \iint_A \xi \ dA$$
+                Zusammengesetzter Schwerpunkt:
+                $$\eta_{\text{ges}} = \frac{1}{A_{\text{ges}}} \cdot (A_1 \cdot \Delta \eta_1 + ... + A_i \cdot \Delta \eta_i)$$
+                $\Delta \eta_i$ = Abstand von $\eta = 0$ zum Schwerpunkt $\eta_i$ des Körpers \\(Abstand zur $\xi$-Achse)
+            \end{itemize}
+        \end{scriptsize}
+
+
+    \subsection{Flächenträgheitsmomente}
+        \begin{scriptsize}
+            \begin{minipage}{0.4\linewidth}
+                \begin{empheq}[box=\fbox]{align*}
+                    I_z &= \iint_A y^2 dA\\
+                    I_y &= \iint_A z^2 dA\\
+                    C_{yz} &= -\iint_A yz dA\\
+                    I_{\xi} &= \iint_A \eta^2 dA\\
+                    I_{\eta} &= \iint_A \xi^2 dA
+                \end{empheq}
+            \end{minipage}
+            \begin{minipage}{0.58\linewidth}
+                \includegraphics[width = 0.9\linewidth]{MECH_Flaechentraegheitsmoment}
+            \end{minipage}    
+        \end{scriptsize} 
+        \cbreak
+     
+    \subsubsection{Verschiebungssatz}
+        \begin{scriptsize}
+            \begin{minipage}{0.58\linewidth}
+                \begin{empheq}[box=\fbox]{align*}
+                    &\text{$y$ und $z$ im Schwerpunkt}\\
+                    I_{\eta} &= I_y + (\Delta \xi)^2 \cdot A\\
+                    I_{\xi} &= I_z + (\Delta \eta)^2 \cdot A\\
+                    C_{\eta \xi} &= C_{yz} - \Delta \xi \cdot \Delta \eta \cdot A
+                \end{empheq}
+            \end{minipage}
+            \begin{minipage}{0.4\linewidth}
+                \includegraphics[width = 0.5\linewidth]{MECH_Verschiebungssatz}
+            \end{minipage}
+        \end{scriptsize}    
+
+    \subsubsection{Trägheitsmoment im Schwerpunkt}    
+        \begin{scriptsize}
+            \begin{empheq}[box=\fbox]{align*}
+                I_{ys} &= [I_{1y} + (\Delta z)^2 A_1] +...+ [I_{ny} + (\Delta z_n)^2 A_n]\\
+                I_{zs} &= [I_{1z} + (\Delta y)^2A_1] +...+ [I_{nz} + (\Delta y_n)^2A_n]\\
+                C_{yzs} &= [C_1 - \Delta \xi \cdot \Delta \eta \cdot A_1] +...+ [C_n - \Delta \xi \cdot \Delta \eta \cdot A_n]
+            \end{empheq}
+        \end{scriptsize}
+
+    \subsubsection{Weitere Beziehungen}
+        \begin{scriptsize}
+            \begin{empheq}[box=\fbox]{align*}
+                I_{\eta} &= sin^2(\alpha) I_z + cos^2(\alpha) I_y + 2sin(\alpha)cos(\alpha) C_{yz}\\
+                I_{\xi} &= cos^2(\alpha) I_z + sin^2(\alpha) I_y - 2 sin(\alpha)cos(\alpha) C_{yz}\\
+                C_{\eta \xi} &= cos(\alpha)sin(\alpha)(I_z-I_y) + (cos^2(\alpha) - sin^2(\alpha))\cdot C_{yz}
+            \end{empheq}
+        \end{scriptsize}    
+
+    \subsection{Spezielle Flächenträgheitsmomente}
+        \begin{scriptsize}
+            \begin{center}
+                \includegraphics[width = 0.9\linewidth]{MECH_spez_Flaechentraegheitsmomente.png}
+                \begin{tabular}{|c|c|c|}
+                    \hline
+                    \null & \cellcolor{SkyBlue} $I_y$ & \cellcolor{Tan}$I_z$ \\
+                    \hhline{|=|=|=|}
+                    \rule[-2.5ex]{0pt}{7ex} 1 & \cellcolor{SkyBlue}$\frac{b\cdot h^3}{12}$ & \cellcolor{Tan}$\frac{h\cdot b^3}{12}$\\
+                    \hline
+                    \rule[-2.5ex]{0pt}{7ex} 2 & \cellcolor{SkyBlue}$\frac{a\cdot h^3}{36}$ & \cellcolor{Tan}$\frac{h\cdot a^3}{36}$\\
+                    \hline
+                    \rule[-2.5ex]{0pt}{7ex} 3 & \cellcolor{SkyBlue}$\frac{\pi}{4} \cdot (R^4-r^4)$ & \cellcolor{Tan} = $I_y$ \\
+                    \hline
+                    \rule[-2.5ex]{0pt}{7ex} 4 & \cellcolor{SkyBlue}$\frac{\pi}{4} \cdot (AB^3-ab^3)$ & \cellcolor{Tan}$\frac{\pi}{4} (BA^3-ba^3)$\\
+                    \hline
+                    \rule[-2.5ex]{0pt}{7ex} 5 & \cellcolor{SkyBlue}$h^3\frac{(b_1+b_2)^2 + 2b_1b_2}{36\cdot (b_1 + b_2)}$ & \cellcolor{Tan}$\frac{h}{48} (b_1+b_2) (b_1^2 + b_2^2)$\\
+                    \hline
+                    \rule[-2.5ex]{0pt}{7ex} 6 & \cellcolor{SkyBlue}$\frac{na^4}{96} \cdot \frac{2+ cos(\alpha)}{(1-cos(\alpha))^2} \cdot sin(\alpha)$ & \cellcolor{Tan} = $I_y$ \\
+                    \hline
+                    \rule[-2.5ex]{0pt}{7ex} 7 & \cellcolor{SkyBlue}$\frac{1}{12} \cdot (BH^3-bh^3)$ & \cellcolor{Tan}$\frac{1}{12} \cdot (HB^3-hb^3)$\\
+                    \hline
+                    \rule[-2.5ex]{0pt}{7ex} 8 & \cellcolor{SkyBlue}$\frac{1}{12} \cdot (BH^3-bh^3)$ & \cellcolor{Tan}$\frac{1}{12} [(H-h)B^3 + h(B-h)^3]$\\
+                    \hline
+                    \rule[-2.5ex]{0pt}{7ex} 9 & \cellcolor{SkyBlue}$\frac{1}{12}\cdot (BH^3-bh^3)$ & \cellcolor{Tan}-\\
+                    \hline
+                \end{tabular}
+            \end{center}
+        \end{scriptsize}    
+
+    \cbreak
+    \subsection{Allgemeine Biegung \hfill (y und z sind Hauptachsen)}  
+        \begin{scriptsize}
+            \begin{itemize}
+                \item \textbf{Normalspannung in x-Richtung:}
+                \begin{empheq}[box=\fbox]{align*}
+                    \sigma(x,y,z) &= \frac{N(x)}{A} - \frac{M_z(x)}{I_z} \cdot y + \frac{M_y(x)}{I_y} \cdot z
+                \end{empheq}
+                \item \textbf{DGL für Mittellinie:}
+            \end{itemize}
+            \begin{empheq}[box=\fbox]{align*}
+                u_{x0}'(x) = \frac{N(x)}{EA} \quad &\mid \quad v_{y0}'(x)= \frac{M_z(x)}{EI_z} 
+                \\ w_{z0}'(x) &= -\frac{M_y(x)}{EI_y}
+            \end{empheq}
+            \begin{itemize}
+                \item \textbf{Dehnung in x-Richtung:}
+                \begin{empheq}[box=\fbox]{align*}
+                    \varepsilon(x,y,z) = u_0'(x) - y \cdot v_0''(x) - z \cdot w_0''(x)
+                \end{empheq}
+                \item \textbf{DGL für Querkraft und Biegemoment:}
+                \begin{empheq}[box=\fbox]{align*}
+                    M_z'(x) = - Q_y(x) \quad \mid \quad M_y'(x) = Q_z(x)
+                \end{empheq}
+            \end{itemize}
+        \end{scriptsize}
+
+    \subsection{Schiefe Biegung}
+        \begin{scriptsize}
+            \begin{minipage}{0.4\linewidth}
+                \includegraphics[width = 1.0\linewidth]{MECH_schiefeBiegung.png}
+            \end{minipage}
+            \begin{minipage}{0.58\linewidth}
+                \begin{empheq}[box=\fbox]{align*}
+                    \sigma_x = \frac{M_y}{I_y} \cdot z - \frac{M_z}{I_z} \cdot y
+                \end{empheq}
+            \end{minipage}
+        \end{scriptsize}   
+        
+    \subsection{Y, Z $\Rightarrow$ keine Hauptachsen}    
+        \begin{scriptsize}
+            \begin{empheq}[box=\fbox]{align*}
+                &M_2, M_3, I_3, I_2 \text{ durch Projektion finden}\\
+                &u_{x0}, u_{y2}, u_{z3} \text{ in Richtung der Hauptachsen}\\
+                &u_{x0}'(x) = \frac{N(x)}{EA} \quad \mid \quad u_{y2}''(x) = \frac{M_3(x)}{EI_3}\\ 
+                &u_{z3}''(x) = -\frac{M_z(x)}{EI_2}\\
+                &\sigma(x,y,z) = \frac{N(x)}{A}-\frac{M_3(x)}{I_3} \cdot y + \frac{M_2(x)}{I_2}\cdot z\\
+                &\text{Rückprojektion von $u_0, u_2, u_3$ um Verschiebung in x,y,z-Richtung zu finden}
+            \end{empheq}
+        \end{scriptsize}
+
+    \section{Schubspannung infolge Biegung}
+    \subsection{Vollquerschnitt}
+        \begin{scriptsize}
+            \begin{minipage}{0.58\linewidth}
+                \begin{empheq}[box=\fbox]{align*}
+                    &\tau_{xy} (x,y) = \frac{Q_y(x)}{I_z} \cdot \frac{H_z(y)}{b(y)}\\
+                    &H_z(y) = \int\limits_{y}^{y_{\text{max}}} \eta \cdot b(\eta) \ d\eta\\ 
+                    &\text{$y$ im Schwerpunkt d. Körpers}
+                \end{empheq}
+            \end{minipage}
+            \begin{minipage}{0.4\linewidth}
+                \includegraphics[width = 1.0\linewidth]{MECH_Vollquerschnitt_Schubspannung.png}
+            \end{minipage}
+        \end{scriptsize}
+      
+    \subsection{Offen, dünnwandig}
+        \begin{scriptsize}
+            \begin{minipage}{0.58\linewidth}
+                \begin{empheq}[box=\fbox]{align*}
+                    &\tau_{xs}(x,s) = -\frac{Q_y(x)}{I_z} \cdot \frac{H_z(s)}{e(s)}\\
+                    &H_z(s) = \int\limits_{0}^{s} y(\eta) \cdot e(\eta) \ d\eta\\
+                    &\text{Polarkoordinaten} \to d\eta = r \cdot d\varphi
+                \end{empheq}
+            \end{minipage}
+            \begin{minipage}{0.4\linewidth}
+                \includegraphics[width = 0.8\linewidth]{MECH_offen_duennwandig.png}
+            \end{minipage}
+        \end{scriptsize}   
+        
+    \subsection{Schubmittelpunkt}
+        \begin{scriptsize}
+            \begin{minipage}{0.58\linewidth}
+                \begin{empheq}[box=\]{}
+                    
+                \end{empheq}
+            \end{minipage}
+        \end{scriptsize}    
+
+
+
+
+
+
+
+\end{document}

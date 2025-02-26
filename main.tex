@@ -1,0 +1,102 @@
+\documentclass[numerate]{cheatsheet}
+\usepackage{blindtext}
+\usepackage{multicol}
+\usepackage{tabularx}
+\usepackage{empheq}
+\usepackage{makecell}
+\usepackage{xcolor}
+\usepackage{scalerel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{color,soul}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage{tabu}
+
+
+\input{headers/cockexpert}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+\usepackage{bigstrut}
+\usepackage{gensymb}
+\usepackage{hhline}
+\usepackage{boldline}
+%\usepackage{ctable}
+\usepackage{mathtools}
+\usepackage[center]{}
+
+\usepackage{enumitem}
+
+% for bold math 
+\usepackage{amsmath,bm}
+
+% for better table
+\usepackage{tabu}
+
+% for partial derivatives
+\usepackage{derivative}
+
+% https://www.overleaf.com/learn/latex/LaTeX_Graphics_using_TikZ%3A_A_Tutorial_for_Beginners_(Part_3)%E2%80%94Creating_Flowcharts
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows}
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=1cm, minimum height=.6cm,text centered, draw=black, fill=red!25]
+\tikzstyle{io} = [rectangle, rounded corners, minimum width=1cm, minimum height=.6cm,text centered, draw=black, fill=blue!25]
+\tikzstyle{processa} = [rectangle, minimum width=1cm, minimum height=.6cm, text centered, draw=black, fill=orange!25]
+\tikzstyle{processba} = [rectangle, minimum width=1cm, minimum height=.6cm, text centered,  text width=3.3cm, draw=black, fill=orange!25]
+\tikzstyle{processbb} = [rectangle, minimum width=1cm, minimum height=.6cm, text centered,  text width=2.8cm, draw=black, fill=orange!25]
+\tikzstyle{decision} = [rectangle, minimum width=1cm, minimum height=.6cm, text centered,, draw=black, fill=green!25]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+\usepackage{fontawesome}
+
+% some AsmTeX options
+\usepackage{amscd, amsmath,amssymb}
+\DeclareMathOperator\arctanh{arctanh}
+\DeclareMathOperator\arcsinh{arcsinh}
+\DeclareMathOperator\arccosh{arccosh}
+
+
+\doctitle{Info I HS2024}
+
+
+\author{\begin{center}
+    Raggi \\ Niggli
+\end{center}}
+
+\begin{document}
+\renewcommand{\multirowsetup}{\centering} %to align center inside the table
+\setlength{\tabcolsep}{4pt}
+
+%New command
+\newcommand{\cbreak}{%
+    \vfill\null\columnbreak%
+}
+
+%New command
+\makeatletter
+\newcommand{\pushright}[1]{\ifmeasuring@#1\else\omit\hfill$\displaystyle#1$\fi\ignorespaces}
+\newcommand{\pushleft}[1]{\ifmeasuring@#1\else\omit$\displaystyle#1$\hfill\fi\ignorespaces}
+\makeatother
+
+%New definition
+\def\doubleunderline#1{\underline{\underline{#1}}}
+   
+\input{Sections/theory}
+
+\input{Sections/code}
+
+\newpage
+\input{Sections/Quellen}
+
+\end{document}
